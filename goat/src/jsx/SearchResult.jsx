@@ -17,9 +17,10 @@ const SearchResult = () => {
             const results = await userService.getSearchResults(params.simpleSearchValue)
 			//.then(res => res.json())
             setSearchResult(results.data)
+            console.log(searchResults)
         }
         fetchData()
-    }, [])
+    }, [params])
 
     const goToSearchResult = async (event) =>{
         const r = JSON.parse(event.target.getAttribute('value'))

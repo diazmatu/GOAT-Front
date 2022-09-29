@@ -7,14 +7,20 @@ import userService from "../service/SearchService";
 const SearchBar = () => {
     
     const navigate = useNavigate();
-    const [searchValue, setSearchValue] = useState('');
+    const [simpleSearchValue, setSimpleSearchValue] = useState('');
+    const [dualSearchValue, setDualSearchValue] = useState('');
     const [tournamentFilter, setTournamentFilter] = useState(true);
     const [teamFilter, setTeamFilter] = useState(true);
     const [playerFilter, setPlayerFilter] = useState(true);
     const [gameFilter, setGameFilter] = useState(false);
+    const [isDualSearch, setIsDualSearch] = useState(false);
 
-    const handleSearchChange = (e)=>{
-        setSearchValue(e.target.value)
+    const handleSimpleSearchChange = (e)=>{
+        setSimpleSearchValue(e.target.value)
+    }
+
+    const handleDualSearchChange = (e)=>{
+        setDualSearchValue(e.target.value)
     }
 
     const handleEnter = async (event) => {
@@ -23,12 +29,18 @@ const SearchBar = () => {
         }
     }
 
-    const handleSearch = (event) =>{
-        navigate("/SearchResult/" + searchValue, {state:{id:searchValue}});
+    const handleEnterNextTeam = (event) => {
+        if (event.key === 'Enter') {
+            document.getElementById("search-TeamB-input").focus();
+            document.getElementById("search-TeamB-input").select();   
+        }
+    }
+
+    const handleSearch = () =>{
+        navigate("/SearchResult/" + simpleSearchValue, {state:{id:simpleSearchValue}});
     }
 
     function onChange( { target } ) {
-
         if ( target.type !== 'checkbox' ) {
             return;
         }
@@ -37,7 +49,6 @@ const SearchBar = () => {
     }
     
     function updateChildren( el ) {
-    
         const { checked } = el;
     
         getChildren( el ).forEach( child => {
@@ -48,7 +59,6 @@ const SearchBar = () => {
     }
     
     function updateParents( parent ) {
-    
         while ( parent = getParent( parent ) ) {
     
             let children = getChildren( parent );
@@ -56,9 +66,7 @@ const SearchBar = () => {
     
             parent.checked = checked === children.length;
             parent.indeterminate = checked && ! parent.checked;
-    
         }
-    
     }
     
     function getChildren( el ) {
@@ -76,8 +84,6 @@ const SearchBar = () => {
         return el && el.querySelector( 'input[type="checkbox"]' );
     
     }
-    
-    document.addEventListener( 'change', onChange);
 
     const handleSelection = (event) =>{
         const setFilters = (bool) =>{
@@ -92,31 +98,33 @@ const SearchBar = () => {
             document.getElementById("TeamSearchCheckbox").checked    ||            
             document.getElementById("PlayerSearchCheckbox").checked
         }
+
+        const setGameSearch = () =>{
+            if(!anyTrue()){
+                document.getElementById("GameSearchCheckbox").checked=(true)
+                setIsDualSearch(true)}
+            else{
+                document.getElementById("GameSearchCheckbox").checked=(false)
+                setIsDualSearch(false)}
+        }
         switch(event.target.value) {
             case 'All':
                 setFilters(event.target.checked)
                 document.getElementById("GameSearchCheckbox").checked=(!event.target.checked)
+                setIsDualSearch(!event.target.checked)
+                debugger
                 break;
             case 'Tournament':
                 setTournamentFilter(event.target.checked)
-                if(!anyTrue()){
-                    document.getElementById("GameSearchCheckbox").checked=(true)}
-                else{
-                    document.getElementById("GameSearchCheckbox").checked=(false)}
+                setGameSearch()
                 break;
             case 'Team':
                 setTeamFilter(event.target.checked)
-                if(!anyTrue()){
-                    document.getElementById("GameSearchCheckbox").checked=(true)}
-                else{
-                    document.getElementById("GameSearchCheckbox").checked=(false)}
+                setGameSearch()
                 break;
             case 'Player':
                 setPlayerFilter(event.target.checked)
-                if(!anyTrue()){
-                    document.getElementById("GameSearchCheckbox").checked=(true)}
-                else{
-                    document.getElementById("GameSearchCheckbox").checked=(false)}
+                setGameSearch()
                 break;
             case 'Game':
                 setFilters(!event.target.checked)                
@@ -124,6 +132,7 @@ const SearchBar = () => {
                 document.getElementById("TournamentSearchCheckbox").checked=(!event.target.checked)                
                 document.getElementById("TeamSearchCheckbox").checked=(!event.target.checked)                
                 document.getElementById("PlayerSearchCheckbox").checked=(!event.target.checked)
+                setIsDualSearch(event.target.checked)
                 break;
             default:
               // code block
@@ -133,19 +142,19 @@ const SearchBar = () => {
     const noClose = (event) => {
         event.stopPropagation();
       };
-
+    
+    document.addEventListener( 'change', onChange);
     document.addEventListener( 'click', noClose);
 
     return (
         <>
             <form className="form-inline my-2 my-lg-0">
-                <div className="col-md-5 mx-auto">
-                    <div className="input-group">
-                        <div className="input-group-btn dropdown" >
-                            <button type="button" className="ms-n0 btn btn-outline-secondary bg-white border-bottom-0 border btn btn-secondary" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <div className="col-md mx-auto">
+                    <div className="input-group dropdown">
+                            <button type="button" className="btn btn-outline-secondary bg-white border-bottom-0 border" id="dropdown-menu-button" data-bs-toggle="dropdown" aria-expanded="false" style={{borderRadius: '9999em 0px 0px 9999em'}}>
                                 <i className="fa-solid fa-sort-down"/> 
                             </button>
-                            <ul className="dropdown-menu" id="searchFilters" aria-labelledby="dropdownMenuButton1" onClick={noClose}>
+                            <ul className="dropdown-menu" id="searchFilters" aria-labelledby="dropdown-menu-button" onClick={noClose}>
                                 <li className="dropdown-item">
                                     <input className="form-check-input" id="AllSearchCheckbox" value="All" type="checkbox" defaultChecked={true} onChange={handleSelection}/>
                                     <label className="form-check-label" htmlFor="All" >All</label>
@@ -169,13 +178,17 @@ const SearchBar = () => {
                                     <label htmlFor="Game" >Game</label>
                                 </li>
                             </ul>
+                        <input className="form-control border-end-0 border " type="simple-search" value={simpleSearchValue} onChange={handleSimpleSearchChange} placeholder="Buscar..." id="search-input" onKeyDown={handleEnter} hidden={isDualSearch}/>  
+
+                        <input className="form-control border-end-0 border " type="simple-search" value={simpleSearchValue} onChange={handleSimpleSearchChange} placeholder="Team A" id="search-TeamA-input" onKeyDown={handleEnterNextTeam} hidden={!isDualSearch}/>  
+                        <div className="input-group-prepend" hidden={!isDualSearch}>
+                            <span className="input-group-text border-end-0 border " id="" style={{borderRadius: '0px 0px 0px 0px'}}>VS</span>
                         </div>
-                        <input className="form-control border-end-0 border rounded-pill " type="search" value={searchValue} onChange={handleSearchChange} placeholder="Buscar..." id="search-input" onKeyDown={handleEnter}/>
-                        <span className="input-group-append" >
-                            <button className="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button" onClick={handleSearch} id="search-button" style={{textAlign: 'center'}}>
-                                <i className="fa-solid fa-magnifying-glass"/>
-                            </button>
-                        </span>
+                        <input className="form-control border-end-0 border " type="dual-search" value={dualSearchValue} onChange={handleDualSearchChange} placeholder="Team B" id="search-TeamB-input" onKeyDown={handleEnter} hidden={!isDualSearch} />
+                        
+                        <button className="btn btn-outline-secondary bg-white border-bottom-0 border" type="button" onClick={handleSearch} id="search-button" style={{textAlign: 'center', borderRadius: '0px 9999em 9999em 0px'}}>
+                            <i className="fa-solid fa-magnifying-glass"/>
+                        </button>
                     </div>
                 </div>
             </form>
