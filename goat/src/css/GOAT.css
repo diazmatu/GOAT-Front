@@ -34,6 +34,15 @@
 	width: 100%;
 }
 
+.ms-n5 {
+    margin-left: -40px;
+}
+
+.ms-n0 {
+    margin-left: -40px;
+	border-radius: 9999em 0px 0px 9999em;
+}
+
 .main-nav{
 	display: block;
 	position: fixed;
@@ -48,7 +57,7 @@
 	z-index: 10;
 	overflow: hidden;
 	background: rgba(100,100,100,0.5) ;
-	text-shadow: 0 0 2px rgba(0,0,0,1);
+	text-shadow: 0 0 2px rgba(0, 0, 0, 0.5)
 }
 .main-nav:before{
 	content: "";
@@ -57,7 +66,7 @@
 	display: inline-block;
 	vertical-align: middle;
 }
-.main-nav .logo{
+.navbar-brand .logo{
 	display: inline-block;
 	vertical-align: middle;
 	width: 70px;

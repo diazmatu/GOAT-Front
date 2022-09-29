@@ -25,12 +25,12 @@ const GOAT = () => {
       <div className="App-header">
         <Routes>
           <Route index element={<Home/>} />
-          <Route path = "/SearchResult" element={<SearchResult/>}/>
+          <Route path = "/SearchResult/:simpleSearchValue" element={<SearchResult/>}/>
           <Route path = "/Home" element={<Home/>} />
-          <Route path = "/Player" element={<Player/>}/>
-          <Route path = "/Team" element={<Team/>}/>
-          <Route path = "/Tournament" element={<Tournament/>}/>
-          <Route path = "/Game" element={<Game/>}/>
+          <Route path = "/Player/:playerDni" element={<Player/>}/>
+          <Route path = "/Team/:teamId" element={<Team/>}/>
+          <Route path = "/Tournament/:tournamentId" element={<Tournament/>}/>
+          <Route path = "/Game/:gameId" element={<Game/>}/>
         </Routes>
       </div>
     </BrowserRouter>

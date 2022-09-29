@@ -1,26 +1,28 @@
 import React, {useEffect,useState}  from 'react';
+import {useNavigate, useLocation, useSearchParams} from "react-router-dom";
+import userService from '../../service/SearchService'
 import '../../css/GOAT.css';
 
-const Player = () => {
+const Player = ({match}) => {
 
-  const [nickName, setNickName] = useState("");
-  const [known, setKnown] = useState([]);
-  const token = localStorage.getItem('token')
+  const playerParams = useLocation();
+  const [playerData, setPlayerData]= useState([])
+  const player = playerParams.state
 
   useEffect(() => {
-    const fetchUsers = async () => {
-        const usr = await fetch('/api/users/'+ token)
-            .then((res) => res.json())
-        setNickName(usr.nickName)
-        setKnown(usr.known)
-    }
-    fetchUsers()
-  }, [setKnown, token]);
+      const fetchData = async () => {
+          const result = await userService.goToSearchResult(player.type, player.id)
+          //.then(res => res.json())
+          setPlayerData(result.data)
+          //console.log(searchResults)
+      }
+      fetchData()
+  }, [])
 
   return (
     <div className="App-header">
         <div className="App-title">
-          {nickName}
+          Player {playerData.name}
         </div>
   </div>
   )

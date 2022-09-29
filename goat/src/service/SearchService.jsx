@@ -1,16 +1,20 @@
 import axios from "axios";
 
-const search_api = "http://localhost:8080/search/"
+const api = "http://localhost:8080/"
 
-const getSearchResults = (search) =>{
+const search_api = api + "search/"
 
+const getSearchResults = (search) => {
     return axios.get(search_api + search);
+}
+
+const goToSearchResult = (type, id) => { return axios.get(api + type + "/" + id)
 
 }
 
-
 const userService = {
-    getSearchResults
+    getSearchResults,
+    goToSearchResult
 }
 
 export default userService

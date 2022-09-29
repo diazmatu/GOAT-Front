@@ -1,26 +1,38 @@
 import React,{useEffect,useState} from 'react'
 import '../css/model/SearchResult.css'
 import userService from '../service/SearchService'
+import {useNavigate, useLocation, useParams} from "react-router-dom";
 
 const SearchResult = () => {   
+    
+    const navigate = useNavigate();
+    const searchParams = useLocation();
+    let params = useParams()
+    //const searchValue = searchParams.state.id
     const [searchResults,setSearchResult]= useState([])
     
     useEffect(() => {
         const fetchData = async () => {
-            const results = await userService.getSearchResults(localStorage.getItem("search"))
+        console.log(params)
+            const results = await userService.getSearchResults(params.simpleSearchValue)
 			//.then(res => res.json())
             setSearchResult(results.data)
-            console.log(searchResults)
         }
         fetchData()
     }, [])
 
+    const goToSearchResult = async (event) =>{
+        const r = JSON.parse(event.target.getAttribute('value'))
+        navigate("/"+ r.type + "/" + r.id, {state : {type : r.type, id : r.id}});
+        //window.location.reload();
+    }
+
     return ( 
-            <div className="btn-group-vertical">
-                <br/>Resultados de '{localStorage.getItem("search")}'
-                {searchResults.map( event =>
-                    <div className="item" key = {event._id} onClick={goToResult}>
-                        {event.name}
+            <div className="">
+                <br/>Resultados de '{localStorage.getItem("search")}' <br/>
+                {searchResults.map( (f, index) =>
+                    <div className={"item " + f.type} key = {index} value = {JSON.stringify(f)} onClick={goToSearchResult}>
+                        {f.name}
                     </div>
                 )}    
             </div>
