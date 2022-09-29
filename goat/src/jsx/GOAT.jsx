@@ -25,7 +25,7 @@ const GOAT = () => {
       <div className="App-header">
         <Routes>
           <Route index element={<Home/>} />
-          <Route path = "/SearchResult/:simpleSearchValue" element={<SearchResult/>}/>
+          <Route path = "/SearchResult/:searchValue" element={<SearchResult/>}/>
           <Route path = "/Home" element={<Home/>} />
           <Route path = "/Player/:playerDni" element={<Player/>}/>
           <Route path = "/Team/:teamId" element={<Team/>}/>

@@ -7,20 +7,22 @@ const SearchResult = () => {
     
     const navigate = useNavigate();
     const searchParams = useLocation();
-    let params = useParams()
+    let {params} = useParams()
     //const searchValue = searchParams.state.id
     const [searchResults,setSearchResult]= useState([])
     
     useEffect(() => {
         const fetchData = async () => {
-        console.log(params)
-            const results = await userService.getSearchResults(params.simpleSearchValue)
+            console.log(params)
+            console.log(searchParams.state)
+            //debugger
+            const results = await userService.getSearchResults(searchParams.state)
 			//.then(res => res.json())
             setSearchResult(results.data)
             console.log(searchResults)
         }
         fetchData()
-    }, [params])
+    }, [searchParams])
 
     const goToSearchResult = async (event) =>{
         const r = JSON.parse(event.target.getAttribute('value'))

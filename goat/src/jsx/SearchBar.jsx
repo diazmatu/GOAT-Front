@@ -37,7 +37,7 @@ const SearchBar = () => {
     }
 
     const handleSearch = () =>{
-        navigate("/SearchResult/" + simpleSearchValue, {state:{id:simpleSearchValue}});
+        navigate("/SearchResult/" + simpleSearchValue + "--" + dualSearchValue, { replace: true, state: {simpleSearch:simpleSearchValue, dualSearch:dualSearchValue, isDual: isDualSearch} });
     }
 
     function onChange( { target } ) {

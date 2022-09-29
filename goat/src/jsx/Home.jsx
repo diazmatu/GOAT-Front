@@ -12,7 +12,7 @@ const Home = () => {
         <br/>
           G ame <br/>
           O ptimal<br/>
-          A ssistant of<br/> 
+          A ssistant for<br/> 
           T eams<br/>
         </div>
   </div>
