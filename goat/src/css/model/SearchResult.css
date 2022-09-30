@@ -1,0 +1,32 @@
+.containerStats {
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 3% 3%; 
+    grid-template-areas: 
+      "Data Data Teams"
+      "Games Games Tournaments"; 
+  }
+  .Data { grid-area: Data; }
+  .Teams { grid-area: Teams; }
+  .Games { grid-area: Games; }
+  .Tournaments { grid-area: Tournaments; }
+
+  .container {  display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3% 3%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Data Teams"
+      "Games Games";
+  }
+  
+  .Data { grid-area: Data; }
+  
+  .Teams { grid-area: Teams; }
+  
+  .Games { grid-area: Games; }
+  
+  .Players { grid-area: Teams; }
+    

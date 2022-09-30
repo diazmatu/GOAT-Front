@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import '../css/model/SearchResult.css'
-import userService from '../service/SearchService'
+import searchService from '../service/SearchService'
 import {useNavigate, useLocation, useParams} from "react-router-dom";
 
 const SearchResult = () => {   
@@ -16,7 +16,7 @@ const SearchResult = () => {
             //console.log(params)
             console.log(searchParams.state)
             //
-            const results = await userService.getSearchResults(searchParams.state)
+            const results = await searchService.getSearchResults(searchParams.state)
 			//.then(res => res.json())
             setSearchResult(results.data)
             //console.log(searchResults)
