@@ -12,7 +12,6 @@ const SearchBar = () => {
     const [tournamentFilter, setTournamentFilter] = useState(true);
     const [teamFilter, setTeamFilter] = useState(true);
     const [playerFilter, setPlayerFilter] = useState(true);
-    const [gameFilter, setGameFilter] = useState(false);
     const [isDualSearch, setIsDualSearch] = useState(false);
 
     const handleSimpleSearchChange = (e)=>{
@@ -37,7 +36,7 @@ const SearchBar = () => {
     }
 
     const handleSearch = () =>{
-        navigate("/SearchResult/" + simpleSearchValue + "--" + dualSearchValue, { replace: true, state: {simpleSearch:simpleSearchValue, dualSearch:dualSearchValue, isDual: isDualSearch} });
+        navigate("/SearchResult/" + simpleSearchValue + "--" + dualSearchValue, { replace: true, state: {simpleSearch:simpleSearchValue, dualSearch:dualSearchValue, isDual: isDualSearch, tournament: tournamentFilter, team: teamFilter, player: playerFilter} });
     }
 
     function onChange( { target } ) {
@@ -87,7 +86,6 @@ const SearchBar = () => {
 
     const handleSelection = (event) =>{
         const setFilters = (bool) =>{
-            setGameFilter(!bool)
             setTeamFilter(bool)
             setTournamentFilter(bool)
             setPlayerFilter(bool)
@@ -104,7 +102,7 @@ const SearchBar = () => {
                 document.getElementById("GameSearchCheckbox").checked=(true)
                 setIsDualSearch(true)}
             else{
-                debugger
+                
                 document.getElementById("GameSearchCheckbox").checked=(false)
                 setDualSearchValue('')
                 setIsDualSearch(false)}
@@ -115,7 +113,7 @@ const SearchBar = () => {
                 document.getElementById("GameSearchCheckbox").checked=(!event.target.checked)
                 setDualSearchValue('')
                 setIsDualSearch(!event.target.checked)
-                debugger
+                
                 break;
             case 'Tournament':
                 setTournamentFilter(event.target.checked)

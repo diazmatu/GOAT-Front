@@ -79,7 +79,7 @@ const Game = () => {
           }
         })
         .then(res => {
-          console.log('Success:', response)
+          //console.log('Success:', response)
           userToUnknown({_id: id, nickName: nickName})
         })
         .catch(error => console.error('Error:', error))

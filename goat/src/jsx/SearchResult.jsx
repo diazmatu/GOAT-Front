@@ -19,8 +19,8 @@ const SearchResult = () => {
             const results = await userService.getSearchResults(searchParams.state)
 			//.then(res => res.json())
             setSearchResult(results.data)
-            console.log(searchResults)
-            debugger
+            //console.log(searchResults)
+            
         }
         fetchData()
     }, [searchParams])
