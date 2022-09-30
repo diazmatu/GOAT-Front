@@ -104,13 +104,16 @@ const SearchBar = () => {
                 document.getElementById("GameSearchCheckbox").checked=(true)
                 setIsDualSearch(true)}
             else{
+                debugger
                 document.getElementById("GameSearchCheckbox").checked=(false)
+                setDualSearchValue('')
                 setIsDualSearch(false)}
         }
         switch(event.target.value) {
             case 'All':
                 setFilters(event.target.checked)
                 document.getElementById("GameSearchCheckbox").checked=(!event.target.checked)
+                setDualSearchValue('')
                 setIsDualSearch(!event.target.checked)
                 debugger
                 break;

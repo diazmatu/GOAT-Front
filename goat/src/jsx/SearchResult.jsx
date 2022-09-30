@@ -7,19 +7,20 @@ const SearchResult = () => {
     
     const navigate = useNavigate();
     const searchParams = useLocation();
-    let {params} = useParams()
+    //let {params} = useParams()
     //const searchValue = searchParams.state.id
     const [searchResults,setSearchResult]= useState([])
     
     useEffect(() => {
         const fetchData = async () => {
-            console.log(params)
+            //console.log(params)
             console.log(searchParams.state)
-            //debugger
+            //
             const results = await userService.getSearchResults(searchParams.state)
 			//.then(res => res.json())
             setSearchResult(results.data)
             console.log(searchResults)
+            debugger
         }
         fetchData()
     }, [searchParams])
@@ -32,10 +33,16 @@ const SearchResult = () => {
 
     return ( 
             <div className="">
-                <br/>Resultados de '{localStorage.getItem("search")}' <br/>
+                <br/>Resultados de ' {searchParams.state.simpleSearch}
+                    {searchParams.state.isDual ?(
+                        ' VS ' +
+                        searchParams.state.dualSearch + " '") : ("'")
+                    }
+                    
+                <br/>
                 {searchResults.map( (f, index) =>
                     <div className={"item " + f.type} key = {index} value = {JSON.stringify(f)} onClick={goToSearchResult}>
-                        {f.name}
+                        {(f.surname && f.name) || f.name || f.teamName + ' VS '}
                     </div>
                 )}    
             </div>
