@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import '../css/model/SearchResult.css'
 import searchService from '../service/SearchService'
+import modelService from '../service/ModelService'
 import {useNavigate, useLocation, useParams} from "react-router-dom";
 
 const SearchResult = () => {   

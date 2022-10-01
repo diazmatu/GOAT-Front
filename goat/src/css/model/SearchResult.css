@@ -7,10 +7,6 @@
       "Data Data Teams"
       "Games Games Tournaments"; 
   }
-  .Data { grid-area: Data; }
-  .Teams { grid-area: Teams; }
-  .Games { grid-area: Games; }
-  .Tournaments { grid-area: Tournaments; }
 
   .container {  display: grid;
     grid-template-columns: 1fr 1fr;
@@ -29,4 +25,6 @@
   .Games { grid-area: Games; }
   
   .Players { grid-area: Teams; }
+
+  .Tournaments { grid-area: Tournaments; }
     
