@@ -14,22 +14,28 @@ export const Tournament = ({match})=>{
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log(tournament)
             const result = await modelService.getModel(tournament.type, tournament.id)
-			//.then(res => res.json())
-            
             setTournamentData(result.data)
-            
-            const teams = await modelService.getTeams(tournamentData.type, tournamentData.id)
-            const games = await modelService.getGames(tournamentData.type, tournamentData.id)
-            
-            setTournamentGames(games.data)
-            setTournamentTeams(teams.data)
-
-            console.log(tournamentData)
+        }
+        const fetchTournamentData = async () => {
+            const result = await modelService.getTournamentData(tournament.type, tournament.id)
+            //const games = await modelService.getGames(tournamentData.type, tournamentData.id)
+			//.then(res => res.json())
+            console.log(result.data)
+            setTournamentTeams(result.data.teams)            
+            //setTournamentGames(games.data)
         }
         fetchData()
+        fetchTournamentData()
     }, [])
+
+    const navigate = useNavigate();
+
+    const goToSearchResult = async (event) =>{
+        const r = JSON.parse(event.target.getAttribute('value'))
+        navigate("/"+ r.type + "/" + r.id, {state : {type : r.type, id : r.id}});
+        //window.location.reload();
+    }
 
     const handleClick = (e)=>{     
     }  
@@ -52,12 +58,14 @@ export const Tournament = ({match})=>{
                                 </div>
                             </div>
                         </div>
-                        <div className="Teams">teams
+                        <div className="Teams">Teams
                             <div className="overflow-auto">
                                 <div className="btn-group-vertical">
-                                    <button type="button" className="btn btn-primary">Left</button>
-                                    <button type="button" className="btn btn-primary">Middle</button>
-                                    <button type="button" className="btn btn-primary">Right</button>
+                                    {tournamentTeams.map( (t, index) =>
+                                        <div className={"item " + t.type} key = {index} value = {JSON.stringify(t)} onClick={goToSearchResult}>
+                                            {t.name}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
