@@ -2,7 +2,7 @@ import React, {useEffect,useState}  from 'react';
 import {useNavigate, useLocation, useSearchParams} from "react-router-dom";
 import modelService from '../../service/ModelService'
 import '../../css/model/SearchResult.css'
-import StatsSheet from '../model/StatsSheet'
+import StatSheet from '../model/StatSheet'
 
 const Team = ({match}) => {
 

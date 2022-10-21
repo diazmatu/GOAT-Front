@@ -3,13 +3,14 @@ import {useNavigate, useLocation, useSearchParams} from "react-router-dom";
 import modelService from '../../service/ModelService'
 import '../../css/GOAT.css';
 import '../../css/model/SearchResult.css'
+import StatSheet from './StatSheet';
 
 const Player = ({match}) => {
 
   const playerParams = useLocation();
-  const [playerData, setPlayerData]= useState([])
-  const [playerGames, setPlayerGames]= useState([])
-  const [playerTeams, setPlayerTeams]= useState([])
+  const [playerData, setPlayerData] = useState({})
+  const [playerGames, setPlayerGames] = useState([])
+  const [playerTeams, setPlayerTeams] = useState([])
   const player = playerParams.state
 
   useEffect(() => {
@@ -17,16 +18,17 @@ const Player = ({match}) => {
           const result = await modelService.getModel(player.type, player.id)
           //.then(res => res.json())
           setPlayerData(result.data)
-          //console.log(searchResults)
+          //console.log(result.data)        
       }
       const fetchPlayerData = async () => {
         const result = await modelService.getPlayerData(player.type, player.id)
         //const games = await modelService.getGames(tournamentData.type, tournamentData.id)
         //.then(res => res.json())
-        console.log(result.data)
         setPlayerTeams(result.data.teams)            
         //setPlayerGames(result.data.games)
     }
+    console.log(playerData)
+    
       fetchData()
       fetchPlayerData()
   }, [])
@@ -41,28 +43,21 @@ const Player = ({match}) => {
   }
 
   return (
-    <div className="App-header">
       <div className="App-title">
         <div className="containerStats">
-          <div className="Data">
-            <div className="card text-white bg-dark mb-3">
-              <div className="row g-0">
-                  <div className="col-md-4">
-                    <img src="..." className="img-fluid rounded-start" alt="Imagen de Morena"/>
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h5 className="card-title">{playerData.name} {playerData.surname}</h5>
-                      <p className="card-text">
-                        DNI: {playerData.id} <br/>
-                        Date of birth: {playerData.birth}
-                      </p>
-                      <p className="card-text"><small className="text-muted"><table id="StatsTable">Tabla de Stats</table></small></p>
-                    </div>
-                  </div>
-              </div>
-            </div>
+        <div className="Data text-white bg-dark mb-3 DataCard">
+          <div className="Image">
+            <img src="..." className="img-fluid rounded-start" alt="Imagen de Morena"/>
           </div>
+            <div className="Info card-body">
+              <h5 className="card-title">{playerData.name} {playerData.surname}</h5>
+              <p className="card-text">
+                DNI: {playerData.id} <br/>
+                Date of birth: {playerData.birth}
+              </p>
+            </div>
+          <div className="Stats"><StatSheet playerData = {[playerData]} /></div>
+        </div>
           <div className="Teams">Teams
                             <div className="overflow-auto">
                               <div className="btn-group-vertical">
@@ -84,7 +79,6 @@ const Player = ({match}) => {
         </div>
         
       </div>
-  </div>
   )
 }
 export default Player;

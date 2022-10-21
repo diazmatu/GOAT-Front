@@ -3,7 +3,6 @@ import axios from "axios";
 const search_api = "http://localhost:8080/search/"
 
 const getSimpleSearchResults = (search) =>{
-    console.log(search)
     return axios.get(search_api + 'simpleSearch/' + search.simpleSearch, { 
         params:{
             tournamentFilter: search.tournament, 
