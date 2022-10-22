@@ -47,7 +47,7 @@ const Player = ({match}) => {
         <div className="containerStats">
         <div className="Data text-white bg-dark mb-3 DataCard">
           <div className="Image">
-            <img src="..." className="img-fluid rounded-start" alt="Imagen de Morena"/>
+            <img src={"data:image/jpg;base64," + playerData.img} className="img-fluid rounded-start p-2 center-block rounded-circle img-thumbnail" alt="Imagen de Morena" style={{display: 'inline-block', textAlign: 'center', width: '20vh'}}/>
           </div>
             <div className="Info card-body">
               <h5 className="card-title">{playerData.name} {playerData.surname}</h5>
@@ -56,7 +56,7 @@ const Player = ({match}) => {
                 Date of birth: {playerData.birth}
               </p>
             </div>
-          <div className="Stats"><StatSheet playerData = {[playerData]} /></div>
+          <div className="Stats"><StatSheet componentData = {[playerData]} /></div>
         </div>
           <div className="Teams">Teams
                             <div className="overflow-auto">
@@ -69,11 +69,17 @@ const Player = ({match}) => {
                                 </div>
                             </div>
                         </div>
-          <div className="Games">Games
-                            <div className="overflow-auto">...</div>
-                        </div>
+                    <div className="Games">Games
+                        <div className="overflow-auto">
+                            <button type="button" className="btn btn-primary">Left</button>
+                            <button type="button" className="btn btn-primary">Middle</button>
+                            <button type="button" className="btn btn-primary">Right</button></div>
+                    </div>
           <div className="Tournaments">Tournaments
-                            <div className="overflow-auto">...</div>
+                            <div className="overflow-auto"><div className="overflow-auto">
+                            <button type="button" className="btn btn-primary">Left</button>
+                            <button type="button" className="btn btn-primary">Right</button></div>
+                    </div>
                         </div>
 
         </div>
