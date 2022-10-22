@@ -5,13 +5,13 @@ const StatsSheetData = ({ dataList, single }) => {
     useEffect(() => { }, [dataList]);
 
     const listData = () => {
-        //debugger;
+        //debugger
         if (Object.keys(dataList[0]).length === 0 && dataList[0].constructor === Object) {
             return (<tbody></tbody>);
         } else {
-            if (dataList[0].type == "Tournament") { dataList.shift(); }
-            //debugger;
+            if (dataList[0].type == "Tournament" || dataList[0].type == "Game") { dataList.shift(); }
             console.log(dataList);
+            //debugger;
             return (
                 <tbody>{dataList.map((s, index) => <tr key={index}>
                     <td hidden={single}>{s.name}</td>

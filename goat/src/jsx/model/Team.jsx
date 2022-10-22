@@ -25,10 +25,10 @@ const Team = ({match}) => {
             const result = await modelService.getTeamData(team.type, team.id)
             //const games = await modelService.getGames(teamData.type, teamData.id)
 			//.then(res => res.json())
-            console.log(result.data)
             setTeamPlayers(result.data.players) 
             setTeamTournaments(result.data.tournaments)  
             //setTeamGames(result.data.games)
+            //console.log(result.data)
         }
         fetchData()
         fetchTeamData()

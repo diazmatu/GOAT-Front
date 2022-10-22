@@ -13,7 +13,7 @@ const StatSheet = ({ componentData }) => {
     const ref = useRef(null);
 
     useEffect(() => {
-        console.log(componentData)
+        //console.log(componentData)
         setSingleData(componentData.length==1)
         //debugger
         /*

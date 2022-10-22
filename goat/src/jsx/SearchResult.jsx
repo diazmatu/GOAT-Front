@@ -24,7 +24,7 @@ const SearchResult = () => {
             //debugger
             const results = await searchService.getSearchResults(searchParams.state)
 			//.then(res => res.json())
-            console.log(results.data.first)
+            //console.log(results.data.first)
             //debugger
             if(!searchParams.state.isDual){
                 setSearchResult(results.data.first)
@@ -32,7 +32,7 @@ const SearchResult = () => {
             } else{
                 setSearchResult(results.data)
             }
-            //console.log(searchResults)
+            console.log(results.data)
             
         }
         fetchData()
@@ -40,7 +40,6 @@ const SearchResult = () => {
 
     const goToSearchResult = async (event) => {
         const r = JSON.parse(event.target.getAttribute('value'))
-        
         navigate("/"+ r.type + "/" + r.id, {state : {type : r.type, id : r.id}});
         //window.location.reload();
     }
@@ -68,6 +67,69 @@ const SearchResult = () => {
         }
     }
 
+    const cardBody = (f) =>{
+
+        const image = (i) => {return(<img src={"data:image/jpg;base64," + i.img} className="p-2 center-block rounded-circle img-thumbnail " style={{display: 'inline-block', textAlign: 'center', width: '5vw'}} alt="..." value = {JSON.stringify(i)}/>)}
+
+        switch(f.type){
+            case "Tournament":
+                return(
+                    <>
+                        <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Tournament"} style={{background: 'linear-gradient(135deg, #dc6601, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Tournament</div>
+                        {image(f)}  
+                        <div className="card-body  text-center" value = {JSON.stringify(f)}>
+                            <h5 className="card-title" value = {JSON.stringify(f)}>{f.name}</h5>
+                            <p className="card-text" value = {JSON.stringify(f)}/>
+                        </div>          
+                    </>
+                )
+                break
+                
+            case "Team":
+                return(
+                    <>
+                        <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Team"} style={{background: 'linear-gradient(135deg, #dc3545, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Team</div>
+                        {image(f)}
+                        <div className="card-body  text-center" value = {JSON.stringify(f)}>
+                            <h5 className="card-title" value = {JSON.stringify(f)}>{f.name}</h5>
+                            <p className="card-text" value = {JSON.stringify(f)}/>
+                        </div>
+            
+                    </>
+                )
+                break
+                
+            case "Player":
+                return(
+                    <>
+                        <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Player"} style={{background: 'linear-gradient(135deg, #dc2545, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Player</div>
+                        {image(f)}
+                        <div className="card-body  text-center" value = {JSON.stringify(f)}>
+                            <h5 className="card-title" value = {JSON.stringify(f)}>{f.surname+ ' ' + f.name}</h5>
+                            <p className="card-text" value = {JSON.stringify(f)}/>
+                        </div>
+                    </>
+                )
+                break
+
+            default:
+                return(
+                    <>
+                        <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Game"} style={{background: 'linear-gradient(135deg, #dc3545, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Game</div>
+                        {image(f.teamA)}
+                        {image(f.teamB)}
+                        <div className="card-body  text-center" value = {JSON.stringify(f)}>
+                            <h5 className="card-title" value = {JSON.stringify(f)}>{f.teamA.name + ' VS ' + f.teamB.name}</h5>
+                            <p className="card-text" value = {JSON.stringify(f)}/>
+                        </div>
+                    </>
+                )
+                break
+        }
+        
+        
+    }
+
     return (
         <>
             <div className="">
@@ -84,16 +146,7 @@ const SearchResult = () => {
                     {searchResults.map( (f, index) =>                      
                         <div className="col mx-auto" key = {index} >
                             <div className={"card text-bg mb-3 item text-center" + f.type} value = {JSON.stringify(f)} onClick={goToSearchResult} style={{background: 'var(--bs-gray-800)', borderRadius: '30px', fontSize: "17px"}} >
-                                <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Tournament"} style={{background: 'linear-gradient(135deg, #dc6601, #dc6601)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Tournament</div>
-                                <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Team"} style={{background: 'linear-gradient(135deg, #dc3545, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Team</div>
-                                <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Player"} style={{background: 'linear-gradient(135deg, #dc3545, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Player</div>
-                                <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Game"} style={{background: 'linear-gradient(135deg, #dc3545, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Game</div>
-                                
-                                <img src={"data:image/jpg;base64," + f.img} className="p-2 center-block rounded-circle img-thumbnail " style={{display: 'inline-block', textAlign: 'center', width: '5vw'}} alt="..." value = {JSON.stringify(f)}/>
-                                <div className="card-body  text-center" value = {JSON.stringify(f)}>
-                                    <h5 className="card-title" value = {JSON.stringify(f)}>{(f.surname && f.name) || f.name || f.teamName + ' VS '}</h5>
-                                    <p className="card-text" value = {JSON.stringify(f)}/>
-                                </div>
+                                {cardBody(f)}
                             </div>
                         </div>
                     )}    

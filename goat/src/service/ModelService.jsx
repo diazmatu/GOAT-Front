@@ -11,9 +11,9 @@ const getTeamData = (type, id) => { return axios.get(api + "model/" + type + "/"
 
 const getPlayerData = (type, id) => { return axios.get(api + "model/" + type + "/" + id)}
 
-/*const getGames = (type, id) => { return axios.get(api + "model/" + type + "/" + id)}
+const getGameData = (type, id) => { return axios.get(api + "model/" + type + "/" + id)}
     
-const navigate = useNavigate();
+/*const navigate = useNavigate();
 
 const goToSearchResult = async (event) =>{
     const r = JSON.parse(event.target.getAttribute('value'))
@@ -26,6 +26,7 @@ const modelService = {
     getTournamentData,
     getTeamData,
     getPlayerData,
+    getGameData
     //goToSearchResult
 }
 
