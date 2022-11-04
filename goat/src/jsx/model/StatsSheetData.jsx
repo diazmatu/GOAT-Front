@@ -10,7 +10,7 @@ const StatsSheetData = ({ dataList, single }) => {
             return (<tbody></tbody>);
         } else {
             if (dataList[0].type == "Tournament" || dataList[0].type == "Game") { dataList.shift(); }
-            console.log(dataList);
+            //console.log(dataList);
             //debugger;
             return (
                 <tbody>{dataList.map((s, index) => <tr key={index}>

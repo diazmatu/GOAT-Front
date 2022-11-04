@@ -24,7 +24,7 @@ export const Tournament = ({match})=>{
 			//.then(res => res.json())
             //console.log(result.data)
             setTournamentTeams(result.data.teams)            
-            //setTournamentGames(games.data)
+            setTournamentGames(result.data.games)
         }
         fetchData()
         fetchTournamentData()
@@ -40,6 +40,8 @@ export const Tournament = ({match})=>{
 
     const handleClick = (e)=>{     
     }  
+
+    const image = (i) => {return(<img src={"data:image/jpg;base64," + i.img} className="p-2 center-block rounded-circle img-thumbnail " style={{display: 'inline-block', textAlign: 'center', width: '5vw'}} alt="..." value = {JSON.stringify(i)}/>)}
 
     return (
         <>
@@ -70,10 +72,17 @@ export const Tournament = ({match})=>{
                         </div>
                     </div>
                     <div className="Games">games
-                        <div className="overflow-auto">
-                            <button type="button" className="btn btn-primary">Left</button>
-                            <button type="button" className="btn btn-primary">Middle</button>
-                            <button type="button" className="btn btn-primary">Right</button>
+                        <div className="overflow-auto">   
+                        {tournamentGames.map( (f, index) =>
+                            <div className={"card text-bg mb-3 item text-center" + f.type} value = {JSON.stringify(f)} onClick={goToSearchResult} style={{background: 'var(--bs-gray-800)', borderRadius: '30px', fontSize: "17px"}} >
+                                {image(f.teamA)}
+                                {image(f.teamB)}
+                                <div className="card-body  text-center" value = {JSON.stringify(f)}>
+                                    <h5 className="card-title" value = {JSON.stringify(f)}>{f.teamA.name + ' VS ' + f.teamB.name}</h5>
+                                    <p className="card-text" value = {JSON.stringify(f)}/>
+                                </div>
+                            </div>
+                        )}
                         </div>
                     </div>
                     </div>

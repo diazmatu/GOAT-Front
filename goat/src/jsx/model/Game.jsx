@@ -19,6 +19,7 @@ const Game = () => {
         const fetchData = async () => {
             const result = await modelService.getModel(game.type, game.id)
 			//.then(res => res.json())
+            //debugger
             setGameData(result.data)
             //console.log(result.data)
         }
@@ -34,7 +35,6 @@ const Game = () => {
             setGamePlayersA(result.data.playersA)
             setGamePlayersB(result.data.playersB)
             console.log(gameTeamA)
-            //debugger
             //setGameTeams(result.data.games)
         }
         fetchData()
@@ -63,7 +63,7 @@ const Game = () => {
                             <img src={"data:image/jpg;base64," + gameData.teamB.img} className="img-fluid rounded-start p-2 center-block rounded-circle img-thumbnail" alt="image of game" style={{display: 'inline-block', textAlign: 'center', width: '20vh'}}/>
                         </div>
                         <div className="Info card-body">
-                            <h5 className="card-title">{gameData.teamA.name + 'VS' + gameData.teamB.name}</h5>
+                            <h5 className="card-title">{gameData.teamA.name + ' VS ' + gameData.teamB.name}</h5>
                             <p className="card-text">
                                 datos de juego<br/>
                             </p>

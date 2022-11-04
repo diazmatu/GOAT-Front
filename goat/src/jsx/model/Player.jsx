@@ -25,9 +25,9 @@ const Player = ({match}) => {
         //const games = await modelService.getGames(tournamentData.type, tournamentData.id)
         //.then(res => res.json())
         setPlayerTeams(result.data.teams)            
-        //setPlayerGames(result.data.games)
+        setPlayerGames(result.data.games)
+        console.log(result.data)
     }
-    console.log(playerData)
     
       fetchData()
       fetchPlayerData()
@@ -42,9 +42,12 @@ const Player = ({match}) => {
       //window.location.reload();
   }
 
+  const image = (i) => {return(<img src={"data:image/jpg;base64," + i.img} className="p-2 center-block rounded-circle img-thumbnail " style={{display: 'inline-block', textAlign: 'center', width: '5vw'}} alt="..." value = {JSON.stringify(i)}/>)}
+
+
   return (
       <div className="App-title">
-        <div className="containerStats">
+        <div className="container">
         <div className="Data text-white bg-dark mb-3 DataCard">
           <div className="Image">
             <img src={"data:image/jpg;base64," + playerData.img} className="img-fluid rounded-start p-2 center-block rounded-circle img-thumbnail" alt="Imagen de Morena" style={{display: 'inline-block', textAlign: 'center', width: '20vh'}}/>
@@ -71,16 +74,18 @@ const Player = ({match}) => {
                         </div>
                     <div className="Games">Games
                         <div className="overflow-auto">
-                            <button type="button" className="btn btn-primary">Left</button>
-                            <button type="button" className="btn btn-primary">Middle</button>
-                            <button type="button" className="btn btn-primary">Right</button></div>
-                    </div>
-          <div className="Tournaments">Tournaments
-                            <div className="overflow-auto"><div className="overflow-auto">
-                            <button type="button" className="btn btn-primary">Left</button>
-                            <button type="button" className="btn btn-primary">Right</button></div>
-                    </div>
+                        {playerGames.map( (f, index) =>
+                            <div className={"card text-bg mb-3 item text-center" + f.type} value = {JSON.stringify(f)} onClick={goToSearchResult} style={{background: 'var(--bs-gray-800)', borderRadius: '30px', fontSize: "17px"}} >
+                                {image(f.teamA)}
+                                {image(f.teamB)}
+                                <div className="card-body  text-center" value = {JSON.stringify(f)}>
+                                    <h5 className="card-title" value = {JSON.stringify(f)}>{f.teamA.name + ' VS ' + f.teamB.name}</h5>
+                                    <p className="card-text" value = {JSON.stringify(f)}/>
+                                </div>
+                            </div>
+                        )}
                         </div>
+                    </div>
 
         </div>
         
