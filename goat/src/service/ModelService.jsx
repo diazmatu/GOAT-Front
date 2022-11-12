@@ -35,7 +35,10 @@ const savePlayer = (data) => {
     debugger
     return axios.post(api + "Player", playerData, {params: { profileImage: formData}})
 }
-    
+
+const getAllTournaments = () =>{ return axios.get(api + "Tournament")}
+ 
+const getAllTeamsOfTournament = (id) =>{ return axios.get(api + "model/Tournament")}
 /*
 const saveTournament = (name, season, category, profileImage) => { return axios.post(api + "Tournament")}
 
@@ -55,7 +58,9 @@ const modelService = {
     getGameData,
     saveTeam,
     savePlayer,
-    saveTournament
+    saveTournament,
+    getAllTournaments,
+    getAllTeamsOfTournament
     //goToSearchResult
 }
 

@@ -3,6 +3,7 @@ import '../css/GOAT.css';
 import TournamentModal from './model/TournamentModal';
 import TeamModal from './model/TeamModal';
 import PlayerModal from './model/PlayerModal';
+import GameModal from './model/GameModal';
 
 const Home = () => {
 
@@ -26,6 +27,11 @@ const Home = () => {
     setModalForm(<PlayerModal/>)
   }
 
+  const requestNewGame = () => {
+    setModel("Game")
+    setModalForm(<GameModal/>)
+  }
+
   return (
     <div className="App-header">
       <div className="btn-group btn-group-justified">
@@ -45,8 +51,12 @@ const Home = () => {
         T eams<br/>
       </div>
 
-      <div className="modal fade modal-dialog modal-dialog-centered modal-dialog-scrollable " id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
+      <div className="btn-group btn-group-justified">
+        <button type="button" onClick={requestNewGame} className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Game</button>
+      </div>
+
+      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content" style={{backgroundColor: '#343a40', color:'#6c757d'}}>
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">Add new {model}</h1>
