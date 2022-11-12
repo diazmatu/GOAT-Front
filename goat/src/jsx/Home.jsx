@@ -1,20 +1,62 @@
-import React  from 'react';
+import React, {useEffect,useState}  from 'react';
 import '../css/GOAT.css';
+import TournamentModal from './model/TournamentModal';
+import TeamModal from './model/TeamModal';
+import PlayerModal from './model/PlayerModal';
 
 const Home = () => {
 
+  const [model, setModel] = useState("")
+  const [modalForm, setModalForm] = useState(<></>)
+  //const [playerData, setPlayerData] = useState({})
+  //const [playerData, setPlayerData] = useState({})
+
+  const requestNewTournament = () => {
+    setModel("Tournament")
+    setModalForm(<TournamentModal/>)
+  }
+
+    const requestNewTeam = () => {
+    setModel("Team")
+    setModalForm(<TeamModal/>)
+  }
+
+  const requestNewPlayer = () => {
+    setModel("Player")
+    setModalForm(<PlayerModal/>)
+  }
+
   return (
     <div className="App-header">
-        <div className="App-title">
-          WELCOME TO G.O.A.T.
+      <div className="btn-group btn-group-justified">
+        <button type="button" onClick={requestNewTournament} className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Tournament</button>
+        <button type="button" onClick={requestNewTeam} className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Team</button>
+        <button type="button" onClick={requestNewPlayer} className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Player</button>
+      </div>
+
+      <div className="App-title">
+        WELCOME TO G.O.A.T.
+      </div>
+      <div className="App-text">
+      <br/>
+        G ame <br/>
+        O ptimal<br/>
+        A ssistant for<br/> 
+        T eams<br/>
+      </div>
+
+      <div className="modal fade modal-dialog modal-dialog-centered modal-dialog-scrollable " id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content" style={{backgroundColor: '#343a40', color:'#6c757d'}}>
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">Add new {model}</h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            {modalForm}
+          </div>
         </div>
-        <div className="App-text">
-        <br/>
-          G ame <br/>
-          O ptimal<br/>
-          A ssistant for<br/> 
-          T eams<br/>
-        </div>
+      </div>
+      
   </div>
   )
 }
