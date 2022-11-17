@@ -30,7 +30,7 @@ const PlayerModal = () => {
 
   return (
     <>
-            <form className="mb-3 needs-validation" novalidate onSubmit={requestNewPlayer}>
+            <form className="mb-3 needs-validation" id='playerForm' novalidate onSubmit={requestNewPlayer}>
         <div className="modal-body">
             <div className="">
                     <label htmlFor="validationCustom02" className="form-label">DNI</label>
@@ -82,7 +82,7 @@ const PlayerModal = () => {
         </div>
         <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" className="btn btn-primary">Add Player</button>
+            <button type="submit" className="btn btn-primary" form='playerForm'>Add Player</button>
         </div>
             </form>
     </>

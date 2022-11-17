@@ -29,7 +29,7 @@ const TeamModal = () => {
 
   return (
     <>
-            <form className="mb-3 needs-validation" novalidate onSubmit={requestNewTeam}>
+            <form className="mb-3 needs-validation" id="teamForm" novalidate onSubmit={requestNewTeam}>
         <div className="modal-body">
                 <div className="">
                     <label htmlFor="validationCustom01" className="form-label">Name</label>
@@ -76,7 +76,7 @@ const TeamModal = () => {
         </div>
         <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" className="btn btn-primary">Add Team</button>
+            <button type="submit" className="btn btn-primary" form='teamForm'>Add Team</button>
         </div>
             </form>
     </>

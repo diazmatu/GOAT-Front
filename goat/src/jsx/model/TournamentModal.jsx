@@ -29,8 +29,8 @@ const TournamentModal = () => {
 
   return (
     <>
-            <form className="mb-3 needs-validation" novalidate onSubmit={requestNewTournament}>
         <div className="modal-body">
+            <form className="mb-3 needs-validation" id="tournamentForm" novalidate onSubmit={requestNewTournament}>
                 <div className="">
                     <label htmlFor="validationCustom01" className="form-label">Name</label>
                     <input type="text" className="form-control" id="validationCustom01" name="name" onChange={handleInputChange} required/>
@@ -73,12 +73,12 @@ const TournamentModal = () => {
                         Please provide a image.
                     </div>
                 </div>
+            </form>
         </div>
         <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" className="btn btn-primary">Add Tournament</button>
+            <button type="submit" className="btn btn-primary" form="tournamentForm">Add Tournament</button>
         </div>
-            </form>
     </>
   )
 }

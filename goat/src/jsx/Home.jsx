@@ -29,7 +29,7 @@ const Home = () => {
 
   const requestNewGame = () => {
     setModel("Game")
-    setModalForm(<GameModal/>)
+    setModalForm(<GameModal />)
   }
 
   return (
