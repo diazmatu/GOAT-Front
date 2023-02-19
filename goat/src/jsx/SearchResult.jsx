@@ -44,26 +44,32 @@ const SearchResult = () => {
         //window.location.reload();
     }
 
+    const hideAlert = (event) =>{
+        var myAlert = document.getElementsByName(event.target.value);
+        myAlert[0].hidden = true
+        myAlert[1].hidden = true
+    }
+
     const searchErrorText = () => {
                 
         if (searchError.length == 3 || (searchParams.state.isDual && searchResults.length == 0)){
             return(
                 <>
-                    || Not found ANY results ||
+                    <div className="alert alert-danger collapse alert-dismissible fade show" role="alert" name='resultsAlert'>
+                        <strong>Not found ANY results</strong>
+                        <button type="button" className="btn-close" value="resultsAlert" onClick={hideAlert} aria-label="Close"></button>
+                    </div>
                 </>)
         }
         else if (searchError.length > 0){
             return(
                 <>
-                        || Not found for
-                    {searchError.map( (r) =>
-                        ' ' + r + ' |'
-                    )
-                    }|
+                    <div className="alert alert-danger collapse alert-dismissible fade show" role="alert" name='resultsAlert'>
+                        <strong>Not found results for:</strong> {searchError.map( (r) =>' ' + r + ' |')}
+                        <button type="button" className="btn-close" value="resultsAlert" onClick={hideAlert} aria-label="Close"></button>
+                    </div>
                         
-                    <br/>
-                </>
-                )
+                </>)
         }
     }
 
@@ -116,10 +122,10 @@ const SearchResult = () => {
                 return(
                     <>
                         <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Game"} style={{background: 'linear-gradient(135deg, #dc3545, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Game</div>
-                        {image(f.teamA)}
-                        {image(f.teamB)}
+                        {image(f.homeTeam)}
+                        {image(f.awayTeam)}
                         <div className="card-body  text-center" value = {JSON.stringify(f)}>
-                            <h5 className="card-title" value = {JSON.stringify(f)}>{f.teamA.name + ' VS ' + f.teamB.name}</h5>
+                            <h5 className="card-title" value = {JSON.stringify(f)}>{f.homeTeam.name + ' VS ' + f.awayTeam.name}</h5>
                             <p className="card-text" value = {JSON.stringify(f)}/>
                         </div>
                     </>
@@ -134,13 +140,13 @@ const SearchResult = () => {
         <>
             <div className="">
                 <div>
-                    <br/>Search results of ' {searchParams.state.simpleSearch}
+                    <br/>Search results of '{searchParams.state.simpleSearch}
                         {searchParams.state.isDual ?(
                             ' VS ' +
                             searchParams.state.dualSearch + " '") : ("' ")
                         }
-
                         {searchErrorText()}
+
                 </div>
                 <div className="row row-cols-1 row-cols-md-3 ">
                     {searchResults.map( (f, index) =>                      

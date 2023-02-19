@@ -30,12 +30,19 @@ const SearchBar = () => {
 
     const handleEnterNextTeam = (event) => {
         if (event.key === 'Enter') {
-            document.getElementById("search-TeamB-input").focus();
-            document.getElementById("search-TeamB-input").select();   
+            document.getElementById("search-AwayTeam-input").focus();
+            document.getElementById("search-AwayTeam-input").select();   
         }
     }
 
     const handleSearch = () =>{
+        var myAlert = document.getElementsByName("resultsAlert");
+        debugger
+        var numOfAlerts = 0
+        while (myAlert.length != numOfAlerts){
+            myAlert[numOfAlerts].hidden = false
+            numOfAlerts+=1
+        }
         navigate("/SearchResult/" + simpleSearchValue + "--" + dualSearchValue, { replace: true, state: {simpleSearch:simpleSearchValue, dualSearch:dualSearchValue, isDual: isDualSearch, tournament: tournamentFilter, team: teamFilter, player: playerFilter} });
     }
 
@@ -181,11 +188,11 @@ const SearchBar = () => {
                             </ul>
                         <input className="form-control border-end-0 border " type="simple-search" value={simpleSearchValue} onChange={handleSimpleSearchChange} placeholder="Buscar..." id="search-input" onKeyDown={handleEnter} hidden={isDualSearch}/>  
 
-                        <input className="form-control border-end-0 border " type="simple-search" value={simpleSearchValue} onChange={handleSimpleSearchChange} placeholder="Team A" id="search-TeamA-input" onKeyDown={handleEnterNextTeam} hidden={!isDualSearch}/>  
+                        <input className="form-control border-end-0 border " type="simple-search" value={simpleSearchValue} onChange={handleSimpleSearchChange} placeholder="Team A" id="search-HomeTeam-input" onKeyDown={handleEnterNextTeam} hidden={!isDualSearch}/>  
                         <div className="input-group-prepend" hidden={!isDualSearch}>
                             <span className="input-group-text border-end-0 border " id="" style={{borderRadius: '0px 0px 0px 0px'}}>VS</span>
                         </div>
-                        <input className="form-control border-end-0 border " type="dual-search" value={dualSearchValue} onChange={handleDualSearchChange} placeholder="Team B" id="search-TeamB-input" onKeyDown={handleEnter} hidden={!isDualSearch} />
+                        <input className="form-control border-end-0 border " type="dual-search" value={dualSearchValue} onChange={handleDualSearchChange} placeholder="Team B" id="search-AwayTeam-input" onKeyDown={handleEnter} hidden={!isDualSearch} />
                         
                         <button className="btn btn-outline-secondary bg-white border-bottom-0 border" type="button" onClick={handleSearch} id="search-button" style={{textAlign: 'center', borderRadius: '0px 9999em 9999em 0px'}}>
                             <i className="fa-solid fa-magnifying-glass"/>
