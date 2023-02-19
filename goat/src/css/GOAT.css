@@ -9,6 +9,9 @@
 	background-size: cover;
   text-align: center;
 }
+.Court{
+	background:url(/public/court.jpg) center center no-repeat ;
+}
 
 .App-header {
   background-color: #282c34;
@@ -146,4 +149,28 @@
 	background-color: rgba(255,255,255,0.4);
 	background: linear-gradient(135deg, #dc6601, #141619)
 }
+
+.LiveGame {  display: grid;
+	grid-template-columns: 1fr 2fr 1fr;
+	grid-template-rows: 0.5fr 2fr 0.5fr;
+	gap: 5% 5%;
+	grid-auto-flow: row;
+	grid-template-areas:
+	  "Timer TopButtons ."
+	  "HomePlayers Court AwayPlayers"
+	  ". BottomButtons .";
+  }
+  
+  .Court { grid-area: Court; }
+  
+  .Timer { grid-area: Timer; }
+  
+  .TopButtons { grid-area: TopButtons; }
+  
+  .BottomButtons { grid-area: BottomButtons; }
+  
+  .AwayPlayers { grid-area: AwayPlayers; }
+  
+  .HomePlayers { grid-area: HomePlayers; }
+  
 

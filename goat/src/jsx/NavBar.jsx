@@ -9,7 +9,7 @@ const NavBar = () => {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a className="navbar-brand" href="Home">
+                <a className="navbar-brand" href="http://localhost:3000/Home">
                     <img src="/Logo.ico" width="30" height="30" className="d-inline-block align-top" alt="Logo"/>
                     GOAT
                 </a>

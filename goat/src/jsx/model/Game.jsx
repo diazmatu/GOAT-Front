@@ -10,10 +10,10 @@ const Game = () => {
     const gameParams = useLocation();
     const [gameData, setGameData]= useState({})
     const game = gameParams.state
-    const [gameTeamA, setGameTeamA]= useState({})
-    const [gameTeamB, setGameTeamB]= useState({})
-    const [gamePlayersA, setGamePlayersA]= useState([])
-    const [gamePlayersB, setGamePlayersB]= useState([])
+    const [gameHomeTeam, setGameHomeTeam]= useState({})
+    const [gameAwayTeam, setGameAwayTeam]= useState({})
+    const [gameHomePlayers, setGameHomePlayers]= useState([])
+    const [gameAwayPlayers, setGameAwayPlayers]= useState([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,16 +30,16 @@ const Game = () => {
 			//.then(res => res.json())
             //console.log(result.data)
             
-            setGameTeamA([result.data.teamA])
-            setGameTeamB([result.data.teamB])
-            setGamePlayersA(result.data.playersA)
-            setGamePlayersB(result.data.playersB)
-            console.log(gameTeamA)
+            setGameHomeTeam([result.data.homeTeam])
+            setGameAwayTeam([result.data.awayTeam])
+            setGameHomePlayers(result.data.homePlayers)
+            setGameAwayPlayers(result.data.awayPlayers)
+            console.log(gameHomeTeam)
             //setGameTeams(result.data.games)
         }
         fetchData()
         fetchGameData()
-    }, [setGameData, setGameTeamA, setGameTeamB, setGamePlayersA, setGamePlayersB])
+    }, [setGameData, setGameHomeTeam, setGameAwayTeam, setGameHomePlayers, setGameAwayPlayers])
 
     const navigate = useNavigate();
 
@@ -59,16 +59,16 @@ const Game = () => {
                 <div className="containerStats">
                     <div className="Data text-white bg-dark mb-3 DataCard">
                         <div className="Image">
-                            <img src={"data:image/jpg;base64," + gameData.teamA.img} className="img-fluid rounded-start p-2 center-block rounded-circle img-thumbnail" alt="image of game" style={{display: 'inline-block', textAlign: 'center', width: '20vh'}}/>
-                            <img src={"data:image/jpg;base64," + gameData.teamB.img} className="img-fluid rounded-start p-2 center-block rounded-circle img-thumbnail" alt="image of game" style={{display: 'inline-block', textAlign: 'center', width: '20vh'}}/>
+                            <img src={"data:image/jpg;base64," + gameData.homeTeam.img} className="img-fluid rounded-start p-2 center-block rounded-circle img-thumbnail" alt="image of game" style={{display: 'inline-block', textAlign: 'center', width: '20vh'}}/>
+                            <img src={"data:image/jpg;base64," + gameData.awayTeam.img} className="img-fluid rounded-start p-2 center-block rounded-circle img-thumbnail" alt="image of game" style={{display: 'inline-block', textAlign: 'center', width: '20vh'}}/>
                         </div>
                         <div className="Info card-body">
-                            <h5 className="card-title">{gameData.teamA.name + ' VS ' + gameData.teamB.name}</h5>
+                            <h5 className="card-title">{gameData.homeTeam.name + ' VS ' + gameData.awayTeam.name}</h5>
                             <p className="card-text">
                                 datos de juego<br/>
                             </p>
                         </div>
-                        <div className="Stats"><StatSheet componentData = {[gameData].concat(gameTeamA).concat(gamePlayersA).concat(gameTeamB).concat(gamePlayersB)} /></div>
+                        <div className="Stats"><StatSheet componentData = {[gameData].concat(gameHomeTeam).concat(gameHomePlayers).concat(gameAwayTeam).concat(gameAwayPlayers)} /></div>
                     </div>
                 </div> 
             </div>

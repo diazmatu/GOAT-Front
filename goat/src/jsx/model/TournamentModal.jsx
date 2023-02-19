@@ -21,16 +21,16 @@ const TournamentModal = () => {
         })
     }
 
-    const requestNewTournament = () => {
-        modelService.saveTournament(data)
-        
-        navigate("/Home")
+    const requestNewTournament = (event) => {
+        modelService.saveTournament(data, navigate)
+        event.preventDefault()
+        //debugger
       }
 
   return (
     <>
         <div className="modal-body">
-            <form className="mb-3 needs-validation" id="tournamentForm" novalidate onSubmit={requestNewTournament}>
+            <form className="mb-3 needs-validation" id="tournamentForm" action='' noValidate={false} onSubmit={requestNewTournament} >
                 <div className="">
                     <label htmlFor="validationCustom01" className="form-label">Name</label>
                     <input type="text" className="form-control" id="validationCustom01" name="name" onChange={handleInputChange} required/>
@@ -54,7 +54,7 @@ const TournamentModal = () => {
                 <div className="col-md-6">
                     <label htmlFor="validationCustom04" className="form-label">Category </label>
                     <select className="form-select" id="validationCustom04" name="category" onChange={handleInputChange} required>
-                        <option selected disabled value="">Choose...</option>
+                        <option defaultValue={true} hidden value="">Choose...</option>
                         <option value="10">10</option>
                         <option value="12">12</option>
                         <option value="13">13</option>
@@ -77,7 +77,7 @@ const TournamentModal = () => {
         </div>
         <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" className="btn btn-primary" form="tournamentForm">Add Tournament</button>
+            <button type="submit" className="btn btn-primary" form="tournamentForm" >Add Tournament</button>
         </div>
     </>
   )

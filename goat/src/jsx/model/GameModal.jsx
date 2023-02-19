@@ -13,10 +13,10 @@ const GameModal = () => {
     const [awayPlayers, setAwayPlayers] = useState([])
     const [limitOfAwayPlayers, setLimitOfAwayPlayers] = useState(false)
     const [data, setData] = useState({
-        tournament: '',
-        homeTeam: '',
+        tournament: {},
+        homeTeam: {},
         homePlayers: [],
-        awayTeam: '',
+        awayTeam: {},
         awayPlayers: []
     })
 
@@ -30,39 +30,34 @@ const GameModal = () => {
             //console.log(result.data)
         }
         const fetchTeams = async () => {
-            try {
-                const t = JSON.parse(data.tournament)
+            const t = data.tournament
+            if (t.id) {
+                //debugger
                 //debugger
                 const result = await modelService.getTournamentData("Tournament", t.id)
                 //.then(res => res.json())
                 //debugger
                 setTeams(result.data.teams)
                 //console.log(result.data.teams)           
-            } catch (err) {
-
             }
         }
 
         const fetchPlayers = async () => {
-            try {
-                const hT = JSON.parse(data.homeTeam)
+            const hT = data.homeTeam
+            if (hT.id) {
                 const result = await modelService.getTeamData("Team", hT.id)
                 //.then(res => res.json())
                 //debugger
                 setHomePlayers(result.data.players)
                 ///console.log("result.data.players")
-              } catch (err) {
-
-              }
-            try {
-                const aT = JSON.parse(data.awayTeam)
+            } 
+            const aT = data.awayTeam
+            if (aT.id) {
                 const res = await modelService.getTeamData("Team", aT.id)
                 //.then(res => res.json())
                 //debugger
                 setAwayPlayers(res.data.players)
                 //console.log(res.data.players)
-            } catch (err) {
-
             }
         }
 
@@ -84,8 +79,8 @@ const GameModal = () => {
 
         setData(data => ({
             ...data,
-            homeTeam: '',
-            awayTeam: '',
+            homeTeam: {},
+            awayTeam: {},
             homePlayers: [],
             awayPlayers: []
           }))
@@ -106,7 +101,7 @@ const GameModal = () => {
     }
 
     const addRemoveFromArray = (name, value, checked, setLimit) => {
-        console.log(name)
+        //console.log(name)
         
         if(checked){
             setData(data => ({
@@ -116,8 +111,8 @@ const GameModal = () => {
 
               setLimit(data[`${name}`].length + 1 === 1)
         } else{
-            
-            var index = data[`${name}`].indexOf(value); 
+            //debugger
+            var index = data[`${name}`].map(object => object.id).indexOf(value.id); 
             const list = data[`${name}`].splice(index, 1);
             if (index !== -1){
                 list.splice(index, 1);
@@ -130,23 +125,23 @@ const GameModal = () => {
               setLimit(data[`${name}`].length - 1 === 1)
         }
 
-        console.log(limitOfHomePlayers)
-        console.log(limitOfAwayPlayers)
+        //console.log(limitOfHomePlayers)
+        //console.log(limitOfAwayPlayers)
     }
 
     const handleInputChange = (event) => {
         // console.log(event.target.name)
         // console.log(event.target.value)
         const name = event.target.name
-        const value = event.target.value
+        const value = JSON.parse(event.target.value)
         switch (name) {
 
             case 'tournament':
                 setData({
                     tournament: value,
-                    homeTeam: '',
+                    homeTeam: {},
                     homePlayers: [],
-                    awayTeam: '',
+                    awayTeam: {},
                     awayPlayers: []
                 })
                 clearSelectedTeams()
@@ -233,38 +228,38 @@ const GameModal = () => {
 
     const isAwayTeam = (id) =>{
         try{
-            const t = JSON.parse(data.awayTeam)
+            const t = data.awayTeam
             return id == t.id} catch{ return false}
     }
 
     const isHomeTeam = (id) =>{
         try{
-            const t = JSON.parse(data.homeTeam)
+            const t = data.homeTeam
             return id == t.id} catch{ return false}
     }
 
     const chosenTournament = () =>{
-        return data.tournament === ''
+        return Object.keys(data.tournament).length === 0 && data.tournament.constructor === Object
     }
 
     const chosenAwayTeam = () =>{
-        return data.awayTeam === ''
+        return Object.keys(data.awayTeam).length === 0 && data.awayTeam.constructor === Object
     }
 
     const chosenHomeTeam = () =>{
-        return data.homeTeam === ''
+        return Object.keys(data.homeTeam).length === 0 && data.homeTeam.constructor === Object
     }
 
-    const requestNewGame = () => {
-        modelService.saveGame(data)
-        navigate("/Home")
+    const requestNewGame = (event) => {
+        modelService.saveGame(data, navigate)
+        event.preventDefault()
       }
 
 
   return (
     <>
         <div className="modal-body ">
-        <form className="mb-3 needs-validation" id="gameForm" novalidate onSubmit={requestNewGame}>
+        <form className="mb-3 needs-validation" id="gameForm" noValidate={false}  onSubmit={requestNewGame}>
             Choose a tournament
             {tournaments.map( (t, index) =>
                     <div className={"form-check item " + t.type} key = {index} value = {JSON.stringify(t)}>
