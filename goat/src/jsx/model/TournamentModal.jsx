@@ -21,10 +21,24 @@ const TournamentModal = () => {
         })
     }
 
+    const handleImageChange = (event) => {
+        // console.log(event.target.name)
+        // console.log(event.target.value)
+
+        //let file = event.target.files[0];
+        //const imageData = new FormData();
+        //imageData.append('imageFile', file);
+        setData({
+            ...data,
+            profileImage : event.target.files[0]
+        })
+    }
+
     const requestNewTournament = (event) => {
+        //debugger
         modelService.saveTournament(data, navigate)
         event.preventDefault()
-        //debugger
+        
       }
 
   return (
@@ -68,7 +82,7 @@ const TournamentModal = () => {
                 </div>
                 <div className="col-md-6">
                     <label htmlFor="validationCustom03" className="form-label">Image</label>
-                    <input type="file" className="form-control" accept="image/*" id="validationCustom03" name="profileImage" onChange={handleInputChange} required/>
+                    <input type="file" className="form-control" accept="image/*" id="validationCustom03" name="profileImage" onChange={handleImageChange} required/>
                     <div className="invalid-feedback">
                         Please provide a image.
                     </div>

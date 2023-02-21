@@ -54,6 +54,19 @@ const TeamModal = () => {
             tournament : event
         })
     }
+
+    const handleImageChange = (event) => {
+        // console.log(event.target.name)
+        // console.log(event.target.value)
+
+        //let file = event.target.files[0];
+        //const imageData = new FormData();
+        //imageData.append('imageFile', file);
+        setData({
+            ...data,
+            profileImage : event.target.files[0]
+        })
+    }
     
 
     const requestNewTeam = (event) => {
@@ -117,7 +130,7 @@ const TeamModal = () => {
                 </div>
                 <div className="">
                     <label htmlFor="validationCustom03" className="form-label">Image</label>
-                    <input type="text" className="form-control" id="validationCustom03" name="profileImage" onChange={handleInputChange} required/>
+                    <input type="text" className="form-control" id="validationCustom03" name="profileImage" onChange={handleImageChange} required/>
                     <div className="invalid-feedback">
                         Please provide a image.
                     </div>
@@ -127,8 +140,7 @@ const TeamModal = () => {
         <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" className="btn btn-primary" form='teamForm'>Add Team</button>
-        
-            </div>
+        </div>
     </>
   )
 }
