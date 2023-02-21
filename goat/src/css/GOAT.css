@@ -156,7 +156,7 @@
 	gap: 5% 5%;
 	grid-auto-flow: row;
 	grid-template-areas:
-	  "Timer TopButtons ."
+	  "Timer TopButtons ScoreBoard"
 	  "HomePlayers Court AwayPlayers"
 	  ". BottomButtons .";
   }
@@ -165,6 +165,8 @@
   
   .Timer { grid-area: Timer; }
   
+  .ScoreBoard { grid-area: ScoreBoard; }
+
   .TopButtons { grid-area: TopButtons; }
   
   .BottomButtons { grid-area: BottomButtons; }
@@ -172,5 +174,12 @@
   .AwayPlayers { grid-area: AwayPlayers; }
   
   .HomePlayers { grid-area: HomePlayers; }
-  
+
+@font-face{
+	font-family:'digital-clock-font';
+	src: url(/src/css/fonts/digital-7/digital-7\ \(mono\).ttf);
+   }
+.Timer{
+	font-family:'digital-clock-font'
+}
 

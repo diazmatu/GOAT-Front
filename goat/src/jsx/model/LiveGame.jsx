@@ -6,6 +6,8 @@ import '../../css/model/SearchResult.css'
 import StatSheet from './StatSheet';
 //import useCountDown from "react-countdown-hook";
 import { useTimer } from 'react-timer-hook';
+import Timer from './LiveClock';
+import Scoreboard from './LiveGame/Scoreboard/js';
 //import Timer from "react-compound-timer"
 
 const LiveGame = () => {
@@ -31,7 +33,9 @@ const LiveGame = () => {
         pause,
         resume,
         restart,
-      } = useTimer({ onExpire: () => console.warn('onExpire called') });
+      } = useTimer({
+        
+        onExpire: () => console.warn('onExpire called') });
     
     
 
@@ -54,6 +58,7 @@ const LiveGame = () => {
             setGameAwayTeam(result.data.awayTeam)
             setGameHomePlayers(result.data.homePlayers)
             setGameAwayPlayers(result.data.awayPlayers)
+            debugger
             //console.log(gameHomeTeam)
             
             //setGameTeams(result.data.games)
@@ -86,18 +91,27 @@ const LiveGame = () => {
                 <div className="Court">
                     
                 </div>
-                <div className="Timer">
-                    <span>{minutes}</span>:<span>{seconds}</span>:<span>{miliseconds}</span>
-                    <p>{isRunning ? 'Running' : 'Not running'}</p>
-                    <button onClick={start}>Start</button>
-                    <button onClick={pause}>Pause</button>
-                    <button onClick={resume}>Resume</button>
-                    <button onClick={() => {
-                        const time = new Date();
-                        time.setSeconds(time.getSeconds() + 600);
-                        restart(time)
-                    }}>Restart</button>
-                </div>
+                <Timer/>
+                
+                <Scoreboard
+            // theme="whale"
+            // theme="dragon"
+            // theme="unicorn"
+            // theme="unicorn-dark"
+            // theme="ice"
+            time={0}
+            home_score={0}
+            away_score={0}
+            home_label={gameHomeTeam.name}
+            away_label={gameAwayTeam.name}
+            home_logo={gameHomeTeam.profileImage}
+            away_logo={gameAwayTeam.profileImage}
+            cur_period={1}
+            period_label={"Period"}
+            period_box={false}
+            period_indicators={true}
+            total_periods={4}>
+          </Scoreboard>
 
                 <div className="TopButtons">
                     <div className="btn-group" role="group" aria-label="Basic example">
