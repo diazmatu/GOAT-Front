@@ -55,7 +55,7 @@ const Home = () => {
         <button type="button" onClick={requestNewGame} className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Game</button>
       </div>
 
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content" style={{backgroundColor: '#343a40', color:'#6c757d'}}>
             <div className="modal-header">
