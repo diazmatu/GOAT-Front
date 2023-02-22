@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {useNavigate} from "react-router-dom";
-import '../css/GOAT.css';
+import '../../css/GOAT.css'
 import SearchBar from "./SearchBar";
 
 

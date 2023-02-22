@@ -8,15 +8,15 @@ import {
   Route,
   //Redirect
 } from "react-router-dom";
-import SearchResult from "./SearchResult"
-import NavBar from "./NavBar"
+import SearchResult from "./NavBar/SearchResult"
+import NavBar from "./NavBar/NavBar"
 import Home from "./Home"
 
 import Player from "./model/Player"
 import Team from "./model/Team"
 import Tournament from "./model/Tournament"
 import Game from "./model/Game"
-import LiveGame from "./model/LiveGame"
+import LiveGame from "./LiveGame/LiveGame"
 
 const GOAT = () => {
   

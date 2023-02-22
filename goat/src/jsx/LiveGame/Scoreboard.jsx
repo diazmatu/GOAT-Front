@@ -1,5 +1,5 @@
 import React, {useEffect, useState, createRef, useRef, ErrorBoundary}  from 'react';
-import '../../../css/model/LiveGame.css'
+import '../../css/model/LiveGame.css'
 
 const Scoreboard = ({ home_score,
     away_score,

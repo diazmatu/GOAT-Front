@@ -3,11 +3,11 @@ import {useNavigate, useLocation, useSearchParams} from "react-router-dom";
 import modelService from '../../service/ModelService'
 import '../../css/model/LiveGame.css';
 import '../../css/model/SearchResult.css'
-import StatSheet from './StatSheet';
+import StatSheet from '../model/StatSheet';
 //import useCountDown from "react-countdown-hook";
 import { useTimer } from 'react-timer-hook';
 import Timer from './LiveClock';
-import Scoreboard from './LiveGame/Scoreboard';
+import Scoreboard from './Scoreboard';
 //import Timer from "react-compound-timer"
 
 const LiveGame = () => {

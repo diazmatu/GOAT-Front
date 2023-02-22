@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { createSearchParams, NavLink } from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
-import '../css/GOAT.css';
-import SearchService from "../service/SearchService";
+import '../../css/GOAT.css';
+import SearchService from "../../service/SearchService"
 
 const SearchBar = () => {
     

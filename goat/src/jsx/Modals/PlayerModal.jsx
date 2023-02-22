@@ -158,7 +158,7 @@ const PlayerModal = () => {
                             closeMenuOnSelect={false}
                             defaultValue={data.team}
                             onChange={handleTeamChange}
-                            options={teams.map(t =>({value:t.id , label: t.name + ' (' + t.tournamentName + ')'}))}
+                            options={teams.map(t =>({value:t.id , label: t.name + ' (' + t.tournamentName[0] + ')'}))}
                             name="team"
                             isClearable={true}
                             isSearchable={true}

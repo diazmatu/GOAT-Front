@@ -1,9 +1,9 @@
 import React, {useEffect,useState}  from 'react';
 import '../css/GOAT.css';
-import TournamentModal from './model/TournamentModal';
-import TeamModal from './model/TeamModal';
-import PlayerModal from './model/PlayerModal';
-import GameModal from './model/GameModal';
+import TournamentModal from './Modals/TournamentModal';
+import TeamModal from './Modals/TeamModal';
+import PlayerModal from './Modals/PlayerModal';
+import GameModal from './Modals/GameModal';
 
 const Home = () => {
 
