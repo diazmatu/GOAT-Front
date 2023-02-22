@@ -25,18 +25,18 @@ const GameModal = () => {
         const fetchTournaments = async () => {
             const result = await modelService.getAllTournaments()
 			//.then(res => res.json())
-            //debugger
+            
             setTournaments(result.data)
             //console.log(result.data)
         }
         const fetchTeams = async () => {
             const t = data.tournament
             if (t.id) {
-                //debugger
-                //debugger
+                
+                
                 const result = await modelService.getTournamentData("Tournament", t.id)
                 //.then(res => res.json())
-                //debugger
+                
                 setTeams(result.data.teams)
                 //console.log(result.data.teams)           
             }
@@ -47,7 +47,7 @@ const GameModal = () => {
             if (hT.id) {
                 const result = await modelService.getTeamData("Team", hT.id)
                 //.then(res => res.json())
-                //debugger
+                
                 setHomePlayers(result.data.players)
                 ///console.log("result.data.players")
             } 
@@ -55,13 +55,13 @@ const GameModal = () => {
             if (aT.id) {
                 const res = await modelService.getTeamData("Team", aT.id)
                 //.then(res => res.json())
-                //debugger
+                
                 setAwayPlayers(res.data.players)
                 //console.log(res.data.players)
             }
         }
 
-        //debugger
+        
         fetchTournaments()
         fetchTeams()
         fetchPlayers()
@@ -111,7 +111,7 @@ const GameModal = () => {
 
               setLimit(data[`${name}`].length + 1 === 1)
         } else{
-            //debugger
+            
             var index = data[`${name}`].map(object => object.id).indexOf(value.id); 
             const list = data[`${name}`].splice(index, 1);
             if (index !== -1){
@@ -194,7 +194,7 @@ const GameModal = () => {
             homePlayers: [...data.homePlayers, event.target.value]
           }))
         setLimitOfHomePlayers(data.homePlayers.length + 1 === 1)
-        //debugger
+        
     }
 
     const handleAwayPlayerChange = (event) => {
@@ -206,19 +206,19 @@ const GameModal = () => {
         })
         setLimitOfAwayPlayers(data.awayPlayers.length + 1 === 12)
         console.log(data)
-        //debugger
+        
     }*/
 
     const isLimit = (name, index) =>{
             try {
             const checkbox = document.getElementById(name + index)
             //console.log(limitOfHomePlayers)
-            //debugger
+            
             if (name == "homePlayers"){
-                //debugger
+                
                 return (limitOfHomePlayers && !checkbox.checked)
             } else {
-                //debugger
+                
                 return (limitOfAwayPlayers && !checkbox.checked)
             }  
         } catch (error) {

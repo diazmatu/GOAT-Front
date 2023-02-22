@@ -1,5 +1,6 @@
 import React, {useRef,useState}  from 'react';
 //import { useTimer } from 'react-timer-hook';
+import '../../css/model/LiveGame.css'
 
 const Timer = () => {
   const { time, start, stop, reset, onTimeout } = useTimer({
@@ -41,7 +42,7 @@ const Timer = () => {
       setTime(t => {
         let totalMillis =
           1000 * (t.minutes * 60 + t.seconds) + t.millis - 10;
-          //debugger
+          
         return {
           minutes: Math.floor((totalMillis % 3600000) / 60000),
           seconds: Math.floor((totalMillis % 60000) / 1000),

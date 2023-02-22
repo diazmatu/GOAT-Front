@@ -37,7 +37,7 @@ const SearchBar = () => {
 
     const handleSearch = () =>{
         var myAlert = document.getElementsByName("resultsAlert");
-        debugger
+        
         var numOfAlerts = 0
         while (myAlert.length != numOfAlerts){
             myAlert[numOfAlerts].hidden = false

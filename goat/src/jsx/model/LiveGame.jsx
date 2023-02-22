@@ -1,13 +1,13 @@
 import React, {useEffect,useState}  from 'react';
 import {useNavigate, useLocation, useSearchParams} from "react-router-dom";
 import modelService from '../../service/ModelService'
-import '../../css/GOAT.css';
+import '../../css/model/LiveGame.css';
 import '../../css/model/SearchResult.css'
 import StatSheet from './StatSheet';
 //import useCountDown from "react-countdown-hook";
 import { useTimer } from 'react-timer-hook';
 import Timer from './LiveClock';
-import Scoreboard from './LiveGame/Scoreboard/js';
+import Scoreboard from './LiveGame/Scoreboard';
 //import Timer from "react-compound-timer"
 
 const LiveGame = () => {
@@ -22,22 +22,9 @@ const LiveGame = () => {
     const [currentPlayer, setCurrentPlayer]= useState({})
     const [currentTeam, setCurrentTeam]= useState({})
     const [tournament, setTournament]= useState({})
+    const [homeScore, setHomeScore]= useState(0)
+    const [awayScore, setAwayScore]= useState(0)
     //const [timeLeft, actions] = useCountDown(10000, 100);
-
-    const {
-        miliseconds,
-        seconds,
-        minutes,
-        isRunning,
-        start,
-        pause,
-        resume,
-        restart,
-      } = useTimer({
-        
-        onExpire: () => console.warn('onExpire called') });
-    
-    
 
     useEffect(() => {
         console.log(gameParams)    
@@ -49,16 +36,15 @@ const LiveGame = () => {
             //console.log(result.data)
         }
         const fetchGameData = async () => {
-            //debugger
+            
             const result = await modelService.getGameData('Game', game.id)
             //const games = await modelService.getTeams(gameData.type, gameData.id)
 			//.then(res => res.json())
-            
             setGameHomeTeam(result.data.homeTeam)
             setGameAwayTeam(result.data.awayTeam)
             setGameHomePlayers(result.data.homePlayers)
             setGameAwayPlayers(result.data.awayPlayers)
-            debugger
+            
             //console.log(gameHomeTeam)
             
             //setGameTeams(result.data.games)
@@ -84,6 +70,14 @@ const LiveGame = () => {
     const handleStat = (e) => {
         modelService.saveStat(e.target.value, currentPlayer, currentTeam, tournament, game.id)
     }
+
+    const handlePointConverted = (e) => {
+        handleStat(e)
+        
+        if (currentTeam == gameHomeTeam.modelId){
+            setHomeScore(homeScore+e.target.name)
+        } else {setAwayScore(awayScore + e.target.name)}
+    }
     
     return (
         <>
@@ -94,43 +88,56 @@ const LiveGame = () => {
                 <Timer/>
                 
                 <Scoreboard
-            // theme="whale"
-            // theme="dragon"
-            // theme="unicorn"
-            // theme="unicorn-dark"
-            // theme="ice"
-            time={0}
-            home_score={0}
-            away_score={0}
+            home_score={homeScore}
+            away_score={awayScore}
             home_label={gameHomeTeam.name}
             away_label={gameAwayTeam.name}
-            home_logo={gameHomeTeam.profileImage}
+            /*home_logo={gameHomeTeam.profileImage}
             away_logo={gameAwayTeam.profileImage}
             cur_period={1}
             period_label={"Period"}
             period_box={false}
             period_indicators={true}
-            total_periods={4}>
-          </Scoreboard>
+            total_periods={4}>*/
+          />
 
                 <div className="TopButtons">
-                    <div className="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" className="btn btn-success" value="threePointsMade" onClick={handleStat}>3PT</button>
-                        <button type="button" className="btn btn-success" value="twoPointsMade" onClick={handleStat}>2PT</button>
-                        <button type="button" className="btn btn-success" value="freeThrowsMade" onClick={handleStat}>1FT</button>
+                    <div className="btn-group btn-group-lg mr-2" role="group" aria-label="Basic example">
+                        <button type="button" className="btn btn-success" value="threePointsMade" name={3} onClick={handlePointConverted}>3PT</button>
+                        <button type="button" className="btn btn-success" value="twoPointsMade" name={2}  onClick={handlePointConverted}>2PT</button>
+                        <button type="button" className="btn btn-success" value="freeThrowsMade" name={1}  onClick={handlePointConverted}>1FT</button>
                     </div>
-                </div>
+                    
+                    <div className="btn-group btn-group-lg mr-2" role="group" aria-label="Basic example">
+                        <button type="button" className="btn btn-success" value="offensiveRebounds" onClick={handleStat}>OfR</button>
+                        <button type="button" className="btn btn-success" value="defensiveRebounds" onClick={handleStat}>DeR</button>
+                    </div>
 
-                <div className="BottomButtons">
-                    <div className="btn-group" role="group" aria-label="Basic example">
+                    <div className="btn-group btn-group-lg mr-2" role="group" aria-label="Basic example">
+                        <button type="button" className="btn btn-success" value="assists" onClick={handleStat}>Ass</button>
+                        <button type="button" className="btn btn-success" value="steals" onClick={handleStat}>Stl</button>
+                        <button type="button" className="btn btn-danger" value="turnovers" onClick={handleStat}>Tov</button>
+                    </div>
+
+                    <br/><br/>
+                    <div className="btn-group btn-group-lg mr-2" role="group" aria-label="Basic example">
                         <button type="button" className="btn btn-danger" value="threePointsAttempted" onClick={handleStat}>3PT</button>
                         <button type="button" className="btn btn-danger" value="twoPointsAttempted" onClick={handleStat}>2PT</button>
                         <button type="button" className="btn btn-danger" value="freeThrowsAttempted" onClick={handleStat}>1FT</button>
                     </div>
+                    <div className="btn-group btn-group-lg mr-2" role="group" aria-label="Basic example">
+                        <button type="button" className="btn btn-success" value="commitedFouls" onClick={handleStat}>CFl</button>
+                        <button type="button" className="btn btn-danger" value="recievedFouls" onClick={handleStat}>RFl</button>
+                    </div>
+                    <div className="btn-group btn-group-lg mr-2" role="group" aria-label="Basic example">
+                        <button type="button" className="btn btn-success" value="commitedBlocks" onClick={handleStat}>CBl</button>
+                        <button type="button" className="btn btn-danger" value="recievedBlocks" onClick={handleStat}>RBl</button>
+                    </div>
                 </div>
 
                 <div className="AwayPlayers">
-                    <div className="btn-group-vertical" role="group" aria-label="Vertical button group">
+                    <div className="btn-group-vertical btn-group-lg" role="group" aria-label="Vertical button group">
+                        AWAY
                         {gameAwayPlayers.map( (p, index) =>
                             <button type="button" key={index} className="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title={p.surname + ' ' + p.name} value={JSON.stringify({player: p.modelId, team: gameAwayTeam.modelId})} onClick={selectPlayer}>
                                 {index + 4}
@@ -139,10 +146,14 @@ const LiveGame = () => {
                     </div>
                 </div>
 
+                <div className='Court'>
+                </div>
+
                 <div className="HomePlayers">
-                    <div className="btn-group-vertical" role="group" aria-label="Vertical button group">
+                    <div className="btn-group-vertical btn-group-lg" role="group" aria-label="Vertical button group">
+                        HOME
                         {gameHomePlayers.map( (p, index) =>
-                            <button type="button" key={index} className="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title={p.surname + ' ' + p.name} value={JSON.stringify({player: p.modelId, team: gameAwayTeam.modelId})} onClick={selectPlayer}>
+                            <button type="button" key={index} className="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title={p.surname + ' ' + p.name} value={JSON.stringify({player: p.modelId, team: gameHomeTeam.modelId})} onClick={selectPlayer}>
                                 {index + 4}
                             </button>
                         )}

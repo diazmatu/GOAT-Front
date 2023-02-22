@@ -23,7 +23,7 @@ const TeamModal = () => {
         const fetchTournaments = async () => {
             const result = await modelService.getAllTournaments()
 			//.then(res => res.json())
-            //debugger
+            
             setTournaments(result.data)
             //console.log(result.data)
         }
@@ -71,7 +71,7 @@ const TeamModal = () => {
 
     const requestNewTeam = (event) => {
         modelService.saveTeam(data, navigate)
-        debugger
+        
         event.preventDefault()
       }
 

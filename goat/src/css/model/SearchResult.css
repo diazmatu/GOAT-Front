@@ -1,29 +1,69 @@
 .containerStats {
     display: grid; 
     grid-template-columns: 8fr 1fr; 
-    grid-template-rows: 6fr 1fr; 
+    grid-template-rows: 3fr 2fr; 
     gap: 3% 3%; 
     grid-template-areas: 
       "Data Teams"
       "Games Tournaments"; 
+    
+      align-items: stretch;
+      justify-items: center;
   }
 
-  .container {  
+  .gameStats {
+    display: grid; 
+    grid-template-columns: 8fr 1fr; 
+    grid-template-rows: 3fr 2fr; 
+    gap: 3% 3%; 
+    grid-template-areas: 
+      "DataGame Teams"
+      "DataGame Tournaments"; 
+      align-items: baseline;
+      justify-items: center;
+  }
+  
+  .DataGame { 
+    grid-area: DataGame;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 1fr 2fr;
+    gap: 5% 5%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Image Info"
+      "Stats Stats";
+  }
+
+  .playerDisplay {  
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    grid-template-rows: 3fr 2fr;
     gap: 3% 3%;
     grid-auto-flow: row;
     grid-template-areas:
       "Data Teams"
       "Games Games";
+    
+    align-items: stretch;
+    justify-items: center;
   }
   
-  .Data { grid-area: Data; }
+  .Data { 
+    grid-area: Data;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 5% 5%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Image Info"
+      "Stats Stats";
+  }
   
   .Teams { grid-area: Teams; }
   
-  .Games { grid-area: Games; }
+  .Games { grid-area: Games;  }
   
   .Players { grid-area: Teams; }
 
@@ -38,6 +78,9 @@
     grid-template-areas:
       "Image Info"
       "Stats Stats";
+      
+    justify-items: stretch;
+
   }
   
   .Image { grid-area: Image; }
@@ -45,4 +88,18 @@
   .Info { grid-area: Info; }
   
   .Stats { grid-area: Stats; }
+
+  
+.Tournament:hover{
+	background-color: rgba(255,255,255,0.4);
+	background: linear-gradient(135deg, #bd2300, #141619)
+}
+.Team:hover{
+	background-color: rgba(255,255,255,0.4);
+	background: linear-gradient(135deg, #c44500, #141619)
+}
+.Player:hover{
+	background-color: rgba(255,255,255,0.4);
+	background: linear-gradient(135deg, #ff8400, #141619)
+}
   

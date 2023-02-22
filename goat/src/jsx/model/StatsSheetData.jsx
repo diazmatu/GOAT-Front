@@ -6,7 +6,7 @@ const StatsSheetData = ({ dataList, single }) => {
 
     const listData = () => {
         
-        if (Object.keys(dataList[0]).length === 0 && dataList[0].constructor === Object || dataList.length == 1) {
+        if (Object.keys(dataList[0]).length === 0 && dataList[0].constructor === Object || dataList.length == 1 && dataList[0].type !== "Player") {
             return (<tbody></tbody>);
         } else {
             if (dataList[0].type == "Tournament" || dataList[0].type == "Game") { 

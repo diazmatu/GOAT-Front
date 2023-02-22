@@ -24,7 +24,7 @@ const PlayerModal = () => {
         const fetchTournaments = async () => {
             const result = await modelService.getAllTournaments()
 			//.then(res => res.json())
-            //debugger
+            
             setTournaments(result.data)
             //console.log(result.data)
         }
@@ -33,19 +33,19 @@ const PlayerModal = () => {
             var teams = []
             for (const t in ts) {
                 console.log(ts[t].value)
-                debugger
+                
                 const result = await modelService.getTournamentData("Tournament", ts[t].value)
                 //.then(res => res.json())
-                //debugger
+                
                 console.log(result.data.teams)
-                debugger
+                
                 teams = teams.concat(result.data.teams)
             }
             
             setTeams(teams)
         }
 
-        //debugger
+        
         fetchTournaments()
         fetchTeams()
     }, [data.tournament])
@@ -60,7 +60,7 @@ const PlayerModal = () => {
     }
 
     const handleTournamentChange = (event) => {
-        //debugger
+        
         setData({
             ...data,
             tournament : event,

@@ -49,7 +49,7 @@ export const Tournament = ({match})=>{
                 <div className="containerStats">
                     <div className="Data text-white bg-dark mb-3 DataCard">
                         <div className="Image">
-                            <img src={"data:image/jpg;base64," + tournamentData.img} className="card-img-top" alt="'Image of tournament'" style={{display: 'inline-block', textAlign: 'center', width: '20vh'}}/>
+                            <img src={"data:image/jpg;base64," + tournamentData.img}  className="img-fluid rounded-start p-2 center-block rounded-circle img-thumbnail" alt="image of team" style={{display: 'inline-block', textAlign: 'center', width: '20vh'}}/>
                         </div>
                         <div className="Info card-body">
                             <h5 className="card-title">{tournamentData.name}</h5>
@@ -71,10 +71,10 @@ export const Tournament = ({match})=>{
                             </div>
                         </div>
                     </div>
-                    <div className="Games">games
+                    <div className="Games">Games
                         <div className="overflow-auto">   
                         {tournamentGames.map( (f, index) =>
-                            <div className={"card text-bg mb-3 item text-center" + f.type} value = {JSON.stringify(f)} onClick={goToSearchResult} style={{background: 'var(--bs-gray-800)', borderRadius: '30px', fontSize: "17px"}} >
+                            <div className={"card text-bg mb-3 item text-center" + f.type} key = {index} value = {JSON.stringify(f)} onClick={goToSearchResult} style={{background: 'var(--bs-gray-800)', borderRadius: '30px', fontSize: "17px", display: "table-cell"}} >
                                 {image(f.homeTeam)}
                                 {image(f.awayTeam)}
                                 <div className="card-body  text-center" value = {JSON.stringify(f)}>

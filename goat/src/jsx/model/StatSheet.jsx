@@ -15,7 +15,7 @@ const StatSheet = ({ componentData }) => {
     useEffect(() => {
         console.log(componentData)
         setSingleData(componentData.length==1)
-        //debugger
+        
         /*
         const table = ref.current;
         //var table = createRef()
@@ -35,7 +35,7 @@ const StatSheet = ({ componentData }) => {
             var thead = "<thead>" 
             var tbody = "<tbody> <tr>"; 
             //table.innerHTML = ""
-            //debugger
+            
             for(var y = 0; y < headers.length; y++){
                 thead += "<th scope='col'>" + headers[y] + "</th>"
                 tbody += "<td>" + tableData.get(headers[y]) + "</td>";
@@ -50,7 +50,7 @@ const StatSheet = ({ componentData }) => {
 
     return(
         <>
-                <table className="table table-secondary table-bordered table-hover table-responsive" id="StatsTable" align='center'>
+                <table className="table table-secondary table-bordered table-hover table-responsive" id="StatsTable" align='center' style={{fontSize:"60%"}}>
                     <thead>
                         <tr>
                             <th rowSpan="2" hidden={singleData}>Name</th>

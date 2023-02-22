@@ -21,11 +21,11 @@ const SearchResult = () => {
         const fetchData = async () => {
             //console.log(params)
             //console.log(searchParams.state)
-            //debugger
+            
             const results = await searchService.getSearchResults(searchParams.state)
 			//.then(res => res.json())
             //console.log(results.data.first)
-            //debugger
+            
             if(!searchParams.state.isDual){
                 setSearchResult(results.data.first)
                 setSearchError(results.data.second)
@@ -40,6 +40,7 @@ const SearchResult = () => {
 
     const goToSearchResult = async (event) => {
         const r = JSON.parse(event.target.getAttribute('value'))
+        
         navigate("/"+ r.type + "/" + r.id, {state : {type : r.type, id : r.id}});
         //window.location.reload();
     }
@@ -81,7 +82,7 @@ const SearchResult = () => {
             case "Tournament":
                 return(
                     <>
-                        <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Tournament"} style={{background: 'linear-gradient(135deg, #dc6601, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Tournament</div>
+                        <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Tournament"} style={{background: 'linear-gradient(135deg, #bd2300, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Tournament</div>
                         {image(f)}  
                         <div className="card-body  text-center" value = {JSON.stringify(f)}>
                             <h5 className="card-title" value = {JSON.stringify(f)}>{f.name}</h5>
@@ -94,7 +95,7 @@ const SearchResult = () => {
             case "Team":
                 return(
                     <>
-                        <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Team"} style={{background: 'linear-gradient(135deg, #dc3545, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Team</div>
+                        <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Team"} style={{background: 'linear-gradient(135deg, #c44500, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Team</div>
                         {image(f)}
                         <div className="card-body  text-center" value = {JSON.stringify(f)}>
                             <h5 className="card-title" value = {JSON.stringify(f)}>{f.name}</h5>
@@ -108,7 +109,7 @@ const SearchResult = () => {
             case "Player":
                 return(
                     <>
-                        <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Player"} style={{background: 'linear-gradient(135deg, #dc2545, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Player</div>
+                        <div className="card-header text-center" value = {JSON.stringify(f)} hidden={f.type != "Player"} style={{background: 'linear-gradient(135deg, #ff8400, #141619)', borderRadius: '30px', fontSize: "17px", fontWeight: 'bold'}} >Player</div>
                         {image(f)}
                         <div className="card-body  text-center" value = {JSON.stringify(f)}>
                             <h5 className="card-title" value = {JSON.stringify(f)}>{f.surname+ ' ' + f.name}</h5>

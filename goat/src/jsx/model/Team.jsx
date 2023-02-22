@@ -79,7 +79,7 @@ const Team = ({match}) => {
                     <div className="Games">Games
                         <div className="overflow-auto">
                         {teamGames.map( (f, index) =>
-                            <div className={"card text-bg mb-3 item text-center" + f.type} value = {JSON.stringify(f)} onClick={goToSearchResult} style={{background: 'var(--bs-gray-800)', borderRadius: '30px', fontSize: "17px"}} >
+                            <div className={"card text-bg mb-3 item text-center" + f.type} value = {JSON.stringify(f)} key = {index} onClick={goToSearchResult} style={{background: 'var(--bs-gray-800)', borderRadius: '30px', fontSize: "17px", display: "table-cell"}} >
                                 {image(f.homeTeam)}
                                 {image(f.awayTeam)}
                                 <div className="card-body  text-center" value = {JSON.stringify(f)}>

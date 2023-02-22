@@ -21,7 +21,7 @@ const uploadImage = async (profileImage, id, type) => {
         formData.append("create_thumbnail", true);
         formData.append("id", id);
         formData.append("type", type);*/
-        //debugger
+        
     try {
         const config = {
             headers: {
@@ -30,10 +30,10 @@ const uploadImage = async (profileImage, id, type) => {
         };  
         const result = await axios.post(api + "model/UploadImage", formData, { params: { type: type, id: id } }, config);
         console.log("Result: ", result);
-        //debugger
+        
     } catch (error) {
         console.error(error);
-        debugger
+        
     }
 }
 /*
@@ -53,11 +53,11 @@ const saveTournament = async (data, navigate) => {
     await axios.post(api + "Tournament", tournamentData, { params: { }, config }).then(response => {
         console.log(response)
         uploadImage(data.profileImage, response.data, "Tournament")
-        //debugger
+        
         navigate("/Tournament/" + response.data, {state : {type : "Tournament", id : response.data}})
-        //debugger
+        
     })
-    debugger
+    
 }
 
 const saveTeam = (data, navigate) => {
@@ -65,12 +65,12 @@ const saveTeam = (data, navigate) => {
     //const tournamentID = Object.assign({}, data.tournament.map( t => (t.value)))
     //data.tournament.map( t => (t.value))
     //console.log(tournamentID)
-    debugger
+    
     return axios.post(api + "Team", teamData, {params: { }}).then(response => {
-        debugger
+        
         console.log(response)
         navigate("/Team/" + response.data, {state : {type : "Team", id : response.data}})
-        debugger
+        
     })
 }
 
@@ -79,12 +79,12 @@ const savePlayer = (data, navigate) => {
     //formData.append("profileImage", data.profileImage);
     const playerData = {dni: data.dni, name: data.name, surname: data.surname, birth: data.birth, profileImage: "", teams: data.team.map( t => (t.value)) }
     console.log(playerData)
-    debugger
+    
     return axios.post(api + "Player", playerData, {params: {}}).then(response => {
-        debugger
+        
         console.log(response)
         navigate("/Player/" + response.data, {state : {type : "Player", id : response.data}})
-        debugger
+        
     })
 }
 
@@ -94,16 +94,16 @@ const saveGame = (data, navigate) => {
     data.homePlayers.map(p => homePlayersId.push(p.id))
     var awayPlayersId = []
     data.awayPlayers.map(p => awayPlayersId.push(p.id))
-    //debugger
+    
 
     const gameData = {tournament: data.tournament.id, homeTeam: data.homeTeam.id, awayTeam: data.awayTeam.id, homePlayers: homePlayersId, awayPlayers: awayPlayersId}
     console.log(gameData)
-    //debugger
+    
     return axios.post(api + "Game", gameData, {}).then(response => {
-        //debugger
+        
         console.log(response)
         navigate("/LiveGame/" + response.data, {state : {type : "Game", id : response.data}})
-        //debugger
+        
     })
 }
 

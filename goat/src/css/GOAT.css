@@ -9,9 +9,6 @@
 	background-size: cover;
   text-align: center;
 }
-.Court{
-	background:url(/public/court.jpg) center center no-repeat ;
-}
 
 .App-header {
   background-color: #282c34;
@@ -47,6 +44,7 @@
 }
 
 .main-nav{
+    justify-content: flex-end;
 	display: block;
 	position: fixed;
 	width: 100%;
@@ -145,41 +143,15 @@
 	transition: all 0.1s;
 	vertical-align: center;
 }
-.item:hover{
+.item:hover .Tournament{
 	background-color: rgba(255,255,255,0.4);
-	background: linear-gradient(135deg, #dc6601, #141619)
+	background: linear-gradient(135deg, #dc5101, #141619)
 }
-
-.LiveGame {  display: grid;
-	grid-template-columns: 1fr 2fr 1fr;
-	grid-template-rows: 0.5fr 2fr 0.5fr;
-	gap: 5% 5%;
-	grid-auto-flow: row;
-	grid-template-areas:
-	  "Timer TopButtons ScoreBoard"
-	  "HomePlayers Court AwayPlayers"
-	  ". BottomButtons .";
-  }
-  
-  .Court { grid-area: Court; }
-  
-  .Timer { grid-area: Timer; }
-  
-  .ScoreBoard { grid-area: ScoreBoard; }
-
-  .TopButtons { grid-area: TopButtons; }
-  
-  .BottomButtons { grid-area: BottomButtons; }
-  
-  .AwayPlayers { grid-area: AwayPlayers; }
-  
-  .HomePlayers { grid-area: HomePlayers; }
-
-@font-face{
-	font-family:'digital-clock-font';
-	src: url(/src/css/fonts/digital-7/digital-7\ \(mono\).ttf);
-   }
-.Timer{
-	font-family:'digital-clock-font'
+.item:hover .Team{
+	background-color: rgba(255,255,255,0.4);
+	background: linear-gradient(135deg, #dc6f01, #141619)
 }
-
+.item .Player:hover{
+	background-color: rgba(255,255,255,0.4);
+	background: linear-gradient(135deg, #dca201, #141619)
+}

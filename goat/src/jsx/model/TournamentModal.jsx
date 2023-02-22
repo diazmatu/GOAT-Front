@@ -35,7 +35,7 @@ const TournamentModal = () => {
     }
 
     const requestNewTournament = (event) => {
-        //debugger
+        
         modelService.saveTournament(data, navigate)
         event.preventDefault()
         
@@ -65,7 +65,7 @@ const TournamentModal = () => {
                         Please select a number of season.
                     </div>
                 </div>
-                <div className="col-md-6">
+                <div className="">
                     <label htmlFor="validationCustom04" className="form-label">Category </label>
                     <select className="form-select" id="validationCustom04" name="category" onChange={handleInputChange} required>
                         <option defaultValue={true} hidden value="">Choose...</option>
@@ -80,7 +80,7 @@ const TournamentModal = () => {
                         Please select a category.
                     </div>
                 </div>
-                <div className="col-md-6">
+                <div className="">
                     <label htmlFor="validationCustom03" className="form-label">Image</label>
                     <input type="file" className="form-control" accept="image/*" id="validationCustom03" name="profileImage" onChange={handleImageChange} required/>
                     <div className="invalid-feedback">
