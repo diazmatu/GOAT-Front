@@ -19,7 +19,7 @@ const LiveGame = () => {
     const [gameAwayTeam, setGameAwayTeam]= useState({})
     const [gameHomePlayers, setGameHomePlayers]= useState([{}])
     const [gameAwayPlayers, setGameAwayPlayers]= useState([{}])
-    const [currentPlayer, setCurrentPlayer]= useState({})
+    const [currentPlayer, setCurrentPlayer]= useState()
     const [currentTeam, setCurrentTeam]= useState({})
     const [tournament, setTournament]= useState({})
     const [homeScore, setHomeScore]= useState(0)
@@ -67,8 +67,22 @@ const LiveGame = () => {
         setCurrentTeam(data.team)
     }
 
+    const hideAlert = (event) =>{
+        var myAlert = document.getElementById(event.target.value);
+        myAlert.hidden = true
+    }
+
     const handleStat = (e) => {
+        console.log(e.target)
+        
+        if(currentPlayer == undefined){
+            var myAlert = document.getElementById("choosePlayer");
+            myAlert.hidden = false
+            
+        } else{
         modelService.saveStat(e.target.value, currentPlayer, currentTeam, tournament, game.id)
+        setCurrentPlayer({})
+        }
     }
 
     const handlePointConverted = (e) => {
@@ -77,6 +91,12 @@ const LiveGame = () => {
         if (currentTeam == gameHomeTeam.modelId){
             setHomeScore(homeScore+e.target.name)
         } else {setAwayScore(awayScore + e.target.name)}
+    }
+
+    const handleFoul = (e) => {
+        handleStat(e)
+        var pause = document.getElementById("pauseTimer");
+        pause.click()
     }
     
     return (
@@ -126,8 +146,8 @@ const LiveGame = () => {
                         <button type="button" className="btn btn-danger" value="freeThrowsAttempted" onClick={handleStat}>1FT</button>
                     </div>
                     <div className="btn-group btn-group-lg mr-2" role="group" aria-label="Basic example">
-                        <button type="button" className="btn btn-success" value="commitedFouls" onClick={handleStat}>CFl</button>
-                        <button type="button" className="btn btn-danger" value="recievedFouls" onClick={handleStat}>RFl</button>
+                        <button type="button" className="btn btn-success" value="commitedFouls" onClick={handleFoul}>CFl</button>
+                        <button type="button" className="btn btn-danger" value="recievedFouls" onClick={handleFoul}>RFl</button>
                     </div>
                     <div className="btn-group btn-group-lg mr-2" role="group" aria-label="Basic example">
                         <button type="button" className="btn btn-success" value="commitedBlocks" onClick={handleStat}>CBl</button>
@@ -137,7 +157,7 @@ const LiveGame = () => {
 
                 <div className="AwayPlayers">
                     <div className="btn-group-vertical btn-group-lg" role="group" aria-label="Vertical button group">
-                        AWAY
+                        AWAY PLAYERS
                         {gameAwayPlayers.map( (p, index) =>
                             <button type="button" key={index} className="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title={p.surname + ' ' + p.name} value={JSON.stringify({player: p.modelId, team: gameAwayTeam.modelId})} onClick={selectPlayer}>
                                 {index + 4}
@@ -151,12 +171,18 @@ const LiveGame = () => {
 
                 <div className="HomePlayers">
                     <div className="btn-group-vertical btn-group-lg" role="group" aria-label="Vertical button group">
-                        HOME
+                        HOME PLAYERS
                         {gameHomePlayers.map( (p, index) =>
                             <button type="button" key={index} className="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title={p.surname + ' ' + p.name} value={JSON.stringify({player: p.modelId, team: gameHomeTeam.modelId})} onClick={selectPlayer}>
                                 {index + 4}
                             </button>
                         )}
+                    </div>
+                </div>
+                <div className='BottomButtons'>
+                    <div className="alert alert-danger collapse alert-dismissible fade show" role="alert"  id='choosePlayer' hidden>
+                        <strong>Choose a player</strong>
+                        <button type="button" className="btn-close" value="choosePlayer" onClick={hideAlert} aria-label="Close"></button>
                     </div>
                 </div>
             </div>

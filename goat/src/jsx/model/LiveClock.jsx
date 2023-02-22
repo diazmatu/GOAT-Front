@@ -12,7 +12,7 @@ const Timer = () => {
       <div className="Timer">
       <h1>{time.minutes.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:{time.seconds.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}.{(time.millis/10).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}</h1>
               <button onClick={start}>Start</button>
-              <button onClick={stop}>Pause</button>
+              <button onClick={stop} id='pauseTimer'>Pause</button>
               <button onClick={reset}>Restart</button>
         </div>
     </div>
