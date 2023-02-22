@@ -68,20 +68,20 @@ const LiveGame = () => {
     }
 
     const hideAlert = (event) =>{
-        var myAlert = document.getElementById(event.target.value);
+        var myAlert = document.getElementById("choosePlayer");
         myAlert.hidden = true
     }
 
     const handleStat = (e) => {
         console.log(e.target)
-        
         if(currentPlayer == undefined){
             var myAlert = document.getElementById("choosePlayer");
             myAlert.hidden = false
             
         } else{
-        modelService.saveStat(e.target.value, currentPlayer, currentTeam, tournament, game.id)
-        setCurrentPlayer({})
+            modelService.saveStat(e.target.value, currentPlayer, currentTeam, tournament, game.id)
+            setCurrentPlayer(undefined)
+            hideAlert()
         }
     }
 
@@ -89,8 +89,8 @@ const LiveGame = () => {
         handleStat(e)
         
         if (currentTeam == gameHomeTeam.modelId){
-            setHomeScore(homeScore+e.target.name)
-        } else {setAwayScore(awayScore + e.target.name)}
+            setHomeScore(homeScore + parseInt(e.target.name))
+        } else {setAwayScore(awayScore + parseInt(e.target.name))}
     }
 
     const handleFoul = (e) => {

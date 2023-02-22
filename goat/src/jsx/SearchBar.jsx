@@ -162,31 +162,31 @@ const SearchBar = () => {
                             <button type="button" className="btn btn-outline-secondary bg-white border-bottom-0 border" id="dropdown-menu-button" data-bs-toggle="dropdown" aria-expanded="false" style={{borderRadius: '9999em 0px 0px 9999em'}}>
                                 <i className="fa-solid fa-sort-down"/> 
                             </button>
-                            <ul className="dropdown-menu" id="searchFilters" aria-labelledby="dropdown-menu-button" onClick={noClose}>
-                                <li className="dropdown-item">
+                            <ul className="dropdown-menu" id="searchFilters" aria-labelledby="dropdown-menu-button" onClick={noClose} style={{width: "85%"}}>
+                                <li className="dropdown-item" style={{justifyContent: "flex-start", alignItems: "center", display: "flex"}}>
                                     <input className="form-check-input" id="AllSearchCheckbox" value="All" type="checkbox" defaultChecked={true} onChange={handleSelection}/>
                                     <label className="form-check-label" htmlFor="All" >All</label>
                                 <ul>
-                                    <li className="dropdown-item filters">
+                                    <li className="dropdown-item filters" style={{justifyContent: "flex-start", alignItems: "center", display: "flex"}}>
                                         <input type="checkbox" name="radios" id="TournamentSearchCheckbox" value="Tournament" defaultChecked={true} onChange={handleSelection}/>
                                         <label htmlFor="Tournament" >Tournament</label>
                                     </li>
-                                    <li className="dropdown-item filters">
+                                    <li className="dropdown-item filters" style={{justifyContent: "flex-start", alignItems: "center", display: "flex"}}>
                                         <input type="checkbox" name="radios" id="TeamSearchCheckbox" value="Team" defaultChecked={true} onChange={handleSelection}/>
                                         <label htmlFor="Team" >Team</label>
                                     </li>
-                                    <li className="dropdown-item filters">
+                                    <li className="dropdown-item filters" style={{justifyContent: "flex-start", alignItems: "center", display: "flex"}}>
                                         <input type="checkbox" name="radios" id="PlayerSearchCheckbox" value="Player" defaultChecked={true} onChange={handleSelection}/>
                                         <label htmlFor="Player" >Player</label>
                                     </li>
                                 </ul>
                                 </li>
-                                <li className="dropdown-item">
+                                <li className="dropdown-item" style={{justifyContent: "flex-start", alignItems: "center", display: "flex"}}>
                                     <input type="checkbox" name="radios" id="GameSearchCheckbox" value="Game"  onChange={handleSelection}/>
                                     <label htmlFor="Game" >Game</label>
                                 </li>
                             </ul>
-                        <input className="form-control border-end-0 border " type="simple-search" value={simpleSearchValue} onChange={handleSimpleSearchChange} placeholder="Buscar..." id="search-input" onKeyDown={handleEnter} hidden={isDualSearch}/>  
+                        <input className="form-control border-end-0 border " type="simple-search" value={simpleSearchValue} onChange={handleSimpleSearchChange} placeholder="Search..." id="search-input" onKeyDown={handleEnter} hidden={isDualSearch}/>  
 
                         <input className="form-control border-end-0 border " type="simple-search" value={simpleSearchValue} onChange={handleSimpleSearchChange} placeholder="Team A" id="search-HomeTeam-input" onKeyDown={handleEnterNextTeam} hidden={!isDualSearch}/>  
                         <div className="input-group-prepend" hidden={!isDualSearch}>

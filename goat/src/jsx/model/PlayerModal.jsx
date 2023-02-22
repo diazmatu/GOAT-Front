@@ -164,9 +164,9 @@ const PlayerModal = () => {
                             isSearchable={true}
                         />
                 </div>
-                <div className="col-md-6">
+                <div className="">
                     <label htmlFor="validationCustom03" className="form-label">Image</label>
-                    <input type="text" className="form-control" id="validationCustom03" name="profileImage" onChange={handleImageChange} required/>
+                    <input type="file" className="form-control" accept="image/*" id="validationCustom03" name="profileImage" onChange={handleImageChange} required/>
                     <div className="invalid-feedback">
                         Please provide a image.
                     </div>
